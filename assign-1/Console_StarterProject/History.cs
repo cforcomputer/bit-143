@@ -1,4 +1,10 @@
-﻿using System;
+﻿// Patrick O'Brien
+// BIT 143
+// Summer 2019
+// Assignment 1
+// Revision 0
+
+using System;
 using System.Collections.Generic;
 using System.Text;
 
