@@ -29,6 +29,25 @@ namespace PCE_StarterProject
     {
         public void RunExercise()
         {
+            Console.WriteLine("Please enter two integers");
+
+            int intOne = Convert.ToInt32(Console.ReadLine());
+            int intTwo = Convert.ToInt32(Console.ReadLine());
+
+            int result = intOne - intTwo;
+            if (result < 0)
+            {
+                result *= -1;
+            }
+
+            if (result <= 5)
+            {
+                Console.WriteLine("{0} and {1} are within 5 integers of each other.", intOne, intTwo);
+            }
+            else
+            {
+                Console.WriteLine("{0} and {1} are NOT within 5 integers of each other.", intOne, intTwo);
+            }
         }
     }
 
