@@ -21,8 +21,8 @@ namespace PCE_StarterProject
             //Scope_Of_Variables sov = new Scope_Of_Variables();
             //sov.RunExercise();
 
-            Array_Of_Ints aoi = new Array_Of_Ints();
-            aoi.RunExercise();
+            //Array_Of_Ints aoi = new Array_Of_Ints();
+            //aoi.RunExercise();
 
             //Object_Composition_Circle circ = new Object_Composition_Circle();
             //circ.RunExercise();

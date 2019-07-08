@@ -4,26 +4,60 @@ using System.Text;
 
 namespace SmartArray_Test
 {
-
     class SmartArray
     {
+        //private int size = 15;
+        int[] arr = new int[5];
         public SmartArray()
-        {
+        {            
+            int [] arr = new int[5];
         }
 
         public bool SetAtIndex(int idx, int val)
         {
+            // set the value at the index
+            if (arr.Length == idx || idx > arr.Length || idx < 0)
+            {
+                return false;
+            }            
+            arr[idx] = val;
+
+            // check to make sure the index is set
+            if (arr[idx] == val)
+            {
+                return true;
+            }
             return false;
         }
         public int GetAtIndex(int idx)
         {
-            return 0;
+            try
+            {
+                return arr[idx];
+            }
+            catch
+            {
+                // unable to access the slot for any reason
+                return Int32.MinValue;
+            }            
         }
         public void PrintAllElements()
         {
+            for (int i = 0; i < arr.Length; i++)
+            {
+                Console.WriteLine(arr[i]);
+            }
         }
         public bool Find(int val)
         {
+            // search the entire length of the array for the value val
+            for (int i =0; i < arr.Length; i++)
+            {
+                if (arr[i] == val)
+                {
+                    return true;
+                }
+            }
             return false;
         }
     }
