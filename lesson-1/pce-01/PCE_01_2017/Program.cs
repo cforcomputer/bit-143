@@ -17,11 +17,15 @@ namespace PCE_StarterProject
             //Fibonnaci_With_Array fwa = new Fibonnaci_With_Array();
             //fwa.RunExercise();
 
-            Scope_Of_Variables sov = new Scope_Of_Variables();
-            sov.RunExercise();
+            //Scope_Of_Variables sov = new Scope_Of_Variables();
+            //sov.RunExercise();
 
             //Array_Of_Ints aoi = new Array_Of_Ints();
             //aoi.RunExercise();
+
+            Object_Composition_Circle circ = new Object_Composition_Circle();
+            circ.RunExercise();
+
         }
     }
 
@@ -153,43 +157,133 @@ namespace PCE_StarterProject
     {
         public void RunExercise()
         {
-            //// Quick test for your Point class:
-            //Point pt1 = new Point(10, 20);
-            //// Pt1 is located at (10,20)
-            //Point pt2 = new Point(0, 0);
-            //// Pt2 is at the origin
+            // Quick test for your Point class:
+            Point pt1 = new Point(10, 20);
+            // Pt1 is located at (10,20)
+            Point pt2 = new Point(0, 0);
+            // Pt2 is at the origin
 
-            //pt1.Print(); // Prints out something like (10, 20)
-            //pt2.Print(); // Prints out something like (0, 0)
-            //pt1.setX(-10);
-            //pt1.Print(); // Now prints out (-10, 20)
-            //pt2.setY(10);
-            //pt2.Print(); // Prints out something like (0, 10)
-            //Console.WriteLine("pt1 is at {0} and {1}", pt1.getX(), pt1.getY());
-            //// prints out: pt1 is at -10 and 20
+            pt1.Print(); // Prints out something like (10, 20)
+            pt2.Print(); // Prints out something like (0, 0)
+            pt1.SetX(-10);
+            pt1.Print(); // Now prints out (-10, 20)
+            pt2.SetY(10);
+            pt2.Print(); // Prints out something like (0, 10)
+            Console.WriteLine("pt1 is at {0} and {1}", pt1.GetX(), pt1.GetY());
+            // prints out: pt1 is at -10 and 20
 
-            //// Note that even though c1 & c2 are using Point
-            //// objects to store the location, we're still passing
-            //// in the x & y values separately 
-            //Circle c1 = new Circle(10, 20, 3);
-            //// c1 is located at (10,20), with radius = 3
-            //Circle c2 = new Circle(0, 0, 4);
-            //// c2 is at the origin, radius is 4
+            // Note that even though c1 & c2 are using Point
+            // objects to store the location, we're still passing
+            // in the x & y values separately 
+            Circle c1 = new Circle(10, 20, 3);
+            // c1 is located at (10,20), with radius = 3
+            Circle c2 = new Circle(0, 0, 4);
+            // c2 is at the origin, radius is 4
 
-            //c1.Print(); // Prints out something like (10, 20) radius=3
-            //c2.Print(); // Prints out something like (0, 0) radius=4
-            //c1.setX(-10);
-            //c1.Print(); // Now prints out (-10, 20) radius=3
-            //c2.setY(10);
-            //c2.setRadius(10);
-            //c2.Print(); // Prints out something like (0, 10) radius=10
-            //Console.WriteLine("c1 is at {0} and {1}, with radius of {2}",
-            //    c1.getX(), c1.getY(), c1.getRadius());
-            //// prints out c1 is at -10 and 20, with radius of 3
+            c1.Print(); // Prints out something like (10, 20) radius=3
+            c2.Print(); // Prints out something like (0, 0) radius=4
+            c1.SetX(-10);
+            c1.Print(); // Now prints out (-10, 20) radius=3
+            c2.SetY(10);
+            c2.SetRadius(10);
+            c2.Print(); // Prints out something like (0, 10) radius=10
+            Console.WriteLine("c1 is at {0} and {1}, with radius of {2}",
+                c1.GetX(), c1.GetY(), c1.GetRadius());
+            // prints out c1 is at -10 and 20, with radius of 3
         }
     }
     // this is a good place to put your Point and Circle classes
 
+    class Point
+    {
+        // Instance variables
+        private double x;
+        private double y;
+
+        // Constructor
+        public Point(double x, double y)
+        {
+            this.x = x;
+            this.y = y;
+        }
+
+        ////////////////////////////////////////////////////////////////////////////
+        // Getters and Setters //
+        public double GetX()
+        {
+            return x;
+        }
+        public void SetX(double setVal)
+        {
+            x = setVal;
+        }
+        public double GetY()
+        {
+            return y;
+        }
+        public void SetY(double setVal)
+        {
+            y = setVal;
+        }
+        ////////////////////////////////////////////////////////////////////////////
+        
+        public void Print()
+        {
+            Console.WriteLine("({0}, {1})", x, y);
+        }
+    }
+
+    // Create a circle class
+    class Circle
+    {
+        private double radius;
+        private double x;
+        private double y;
+
+        //private Point circlePoint;
+        public double GetRadius()
+        {
+            return radius;
+        }
+        public void SetRadius(double rad)
+        {
+            this.radius = rad;
+        }
+
+        public double GetX()
+        {
+            return x;
+        }
+        public void SetX(double setVal)
+        {
+            this.x = setVal;
+        }
+        public double GetY()
+        {
+            return y;
+        }
+        public void SetY(double setVal)
+        {
+            this.y = setVal;
+        }
+        
+        public Circle(double xPoint, double yPoint, double rad)
+        {
+            //Point circ = new Point(xPoint, yPoint);
+            //this.circlePoint = circ;
+            this.radius = rad;
+            this.x = xPoint;
+            this.y = yPoint;
+        }
+
+        public void Print()
+        {
+            Console.WriteLine();
+            //circlePoint.Print();
+            //({0}, {1})
+            Console.WriteLine("({0}, {1}) radius={2} \n", x, y, radius);
+        }
+    }
 
     class Array_Of_Ints
     {
