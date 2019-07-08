@@ -11,17 +11,17 @@ namespace PCE_StarterProject
             // Once you complete it, feel free to comment these lines out
             // That way, you won't have every single exercise being run, each and
             // every time :)
-            IO_Operators ioo = new IO_Operators();
-            ioo.RunExercise();
+            //IO_Operators ioo = new IO_Operators();
+            //ioo.RunExercise();
 
-            // Fibonnaci_With_Array fwa = new Fibonnaci_With_Array();
-            // fwa.RunExercise();
+            //Fibonnaci_With_Array fwa = new Fibonnaci_With_Array();
+            //fwa.RunExercise();
 
             // Scope_Of_Variables sov = new Scope_Of_Variables();
             // sov.RunExercise();
 
-            Array_Of_Ints aoi = new Array_Of_Ints();
-            aoi.RunExercise();
+            //Array_Of_Ints aoi = new Array_Of_Ints();
+            //aoi.RunExercise();
         }
     }
 
@@ -35,11 +35,14 @@ namespace PCE_StarterProject
             int intTwo = Convert.ToInt32(Console.ReadLine());
 
             int result = intOne - intTwo;
+
+            // Find the absolute value difference
             if (result < 0)
             {
                 result *= -1;
             }
 
+            // If the absolute value is <= 5 then print
             if (result <= 5)
             {
                 Console.WriteLine("{0} and {1} are within 5 integers of each other.", intOne, intTwo);
@@ -55,6 +58,31 @@ namespace PCE_StarterProject
     {
         public void RunExercise()
         {
+            // Create a new array with 20 slots
+            int[] fib = new int[20];
+
+            // Assign the first two slots to 0 and 1
+            fib[0] = 0;
+            fib[1] = 1;
+
+            // Print the first two slots before the loop
+            Console.WriteLine(fib[0] + "\n" + fib[1]);
+
+            // Starting from slot 3, fill the loop with fibonacci sequence
+            for (int c = 2; c <= fib.Length; c++)
+            { 
+                try
+                {
+                    // Array out of bounds because ?
+                    fib[c] = fib[c - 1] + fib[c - 2];
+                }
+                catch
+                {
+                    break;
+                }
+
+                Console.WriteLine(fib[c]);
+            }            
         }
     }
 
