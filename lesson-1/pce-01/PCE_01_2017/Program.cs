@@ -89,7 +89,10 @@ namespace PCE_StarterProject
     class Scope_Of_Variables
     {
         // Put your comment here:
-
+        // Instance variables = defined within the class but outside the method. Defined without static.
+        // Lasts as long as the class is executing.
+        // Local variables = Defined within the method, lasts as long as the method.
+        // Parameter = Defined in a method declaration, lasts as long as the method.
         public void RunExercise()
         {
             NumberPrinter np = new NumberPrinter();
