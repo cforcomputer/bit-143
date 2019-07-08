@@ -17,8 +17,8 @@ namespace PCE_StarterProject
             //Fibonnaci_With_Array fwa = new Fibonnaci_With_Array();
             //fwa.RunExercise();
 
-            // Scope_Of_Variables sov = new Scope_Of_Variables();
-            // sov.RunExercise();
+            Scope_Of_Variables sov = new Scope_Of_Variables();
+            sov.RunExercise();
 
             //Array_Of_Ints aoi = new Array_Of_Ints();
             //aoi.RunExercise();
@@ -92,6 +92,57 @@ namespace PCE_StarterProject
 
         public void RunExercise()
         {
+            NumberPrinter np = new NumberPrinter();
+            np.SetLowest(3.14159);
+            np.SetHighest(12);
+            np.Print(true);
+            np.SetHighest(17.1);
+            np.Print(false);
+        }
+    }
+
+    // New class called NumberPrinter
+    class NumberPrinter
+    {
+        private int highest;
+        private int lowest;
+
+        // Constructor that sets the lowest and the highest to be 0
+        public NumberPrinter()
+        {
+            highest = 0;
+            lowest = 0;
+        }
+
+        public void SetHighest(double high)
+        {
+            highest = Convert.ToInt32(high);
+        }
+
+        public void SetLowest(double low)
+        {
+            lowest = Convert.ToInt32(low);
+        }
+        public void Print(bool even)
+        {
+            if (!even)
+            {
+                for (int i = lowest; i <= highest; i++)
+                {
+                    Console.WriteLine(i);
+                }
+            }
+            else
+            {
+                for (int i = lowest; i <= highest; i++)
+                {
+                    if (i % 2 == 0)
+                    {
+                        Console.WriteLine(i);
+                    }
+                }
+            }
+                   
         }
     }
 
