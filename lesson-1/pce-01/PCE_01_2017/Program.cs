@@ -11,6 +11,7 @@ namespace PCE_StarterProject
             // Once you complete it, feel free to comment these lines out
             // That way, you won't have every single exercise being run, each and
             // every time :)
+
             //IO_Operators ioo = new IO_Operators();
             //ioo.RunExercise();
 
@@ -20,12 +21,11 @@ namespace PCE_StarterProject
             //Scope_Of_Variables sov = new Scope_Of_Variables();
             //sov.RunExercise();
 
-            //Array_Of_Ints aoi = new Array_Of_Ints();
-            //aoi.RunExercise();
+            Array_Of_Ints aoi = new Array_Of_Ints();
+            aoi.RunExercise();
 
-            Object_Composition_Circle circ = new Object_Composition_Circle();
-            circ.RunExercise();
-
+            //Object_Composition_Circle circ = new Object_Composition_Circle();
+            //circ.RunExercise();
         }
     }
 
@@ -289,6 +289,44 @@ namespace PCE_StarterProject
     {
         public void RunExercise()
         {
+            int userCheck = 10;
+            int select = 0;
+                        
+            while (userCheck != 1000)
+            {
+                Console.WriteLine("Please enter the size of the array: ");
+                try
+                {
+                    userCheck = Convert.ToInt32(Console.ReadLine());
+                
+                    int[] ray = new int[userCheck];
+                
+                for (int i = 0; i < ray.Length; i++)
+                {
+                    if (!(i % 2 == 0))
+                    {
+                        ray[i] = i;
+                        Console.WriteLine(ray[i]);
+                    }
+                }
+                Console.WriteLine("\nWhat space in the array would you like to examine?");
+                select = Convert.ToInt32(Console.ReadLine());
+                
+                if (select > ray.Length || select < 0)
+                {
+                    Console.WriteLine("You did an oopsy");
+                }
+                else
+                {
+                    Console.WriteLine(ray[select]);
+                }
+
+                }
+                catch
+                {
+                    Console.WriteLine("The value was incorrect for int32");
+                }
+            }
         }
     }
 }
