@@ -1,113 +1,57 @@
 ﻿using System;
-using SmartArray_Test;
-
-// 400_enum_ErrorCode Project
 
 namespace SmartArray_Test
 {
-
-   // Your enum goes here:
-    enum ErrorCode
-    {
-        NoError,
-        Underflow,
-        Overflow
-    }
-
-    
     class SmartArray
     {
-        int[] rgNums;
-
-        //// Running time for this method:
-        //// Explanation (Why did you choose that running time?):
+        //private int size = 15;
+        int[] arr = new int[5];
         public SmartArray()
-        {
-           rgNums = new int[5];
+        {            
+            int [] arr = new int[5];
         }
 
-        //// Running time for this method:
-        //// Explanation (Why did you choose that running time?):
-        
-            // Second overloaded constructor
-        public SmartArray(int howMany)
-        {
-            // An integer that specifies what the size of the array should be
-            // Allocates an array given by the param
-
-            rgNums = new int[howMany];
-        }
-
-        // Running time for this method:s
-        // Explanation (Why did you choose that running time?):
-        public ErrorCode SetAtIndex(int idx, int val)
+        public bool SetAtIndex(int idx, int val)
         {
             // set the value at the index
-            if (idx < 0)
+            if (arr.Length == idx || idx > arr.Length || idx < 0)
             {
-                return ErrorCode.Underflow;
-            }           
+                return false;
+            }            
+            arr[idx] = val;
 
-            else if (idx > rgNums.Length || rgNums.Length == idx)
-            {
-                return ErrorCode.Overflow;
-            }
             // check to make sure the index is set
-            // set rgNums[idx] out as val
-            rgNums[idx] = val;
-
-            if (rgNums[idx] == val)
+            if (arr[idx] == val)
             {
-                // if it is, return no error
-                return ErrorCode.NoError;
+                return true;
             }
-            
-            return ErrorCode.Underflow;
+            return false;
         }
-
-        // Running time for this method:
-        // Explanation (Why did you choose that running time?):
-        public ErrorCode GetAtIndex(int idx, out int val)
+        public int GetAtIndex(int idx)
         {
-            // Checks to see if the slot can be accessed
-            if (idx < 0)
+            try
             {
-                val = Int32.MinValue;
-                return ErrorCode.Underflow;
+                return arr[idx];
             }
-            else if (idx > rgNums.Length || rgNums.Length == idx)
+            catch
             {
-                val = Int32.MinValue;
-                return ErrorCode.Overflow;
-            }
-            else
-            { 
-                val = rgNums[idx];
-
-                return ErrorCode.NoError;
-            }
-             // return ErrorCode.Overflow;
+                // unable to access the slot for any reason
+                return Int32.MinValue;
+            }            
         }
-
-        // Running time for this method:
-        // Explanation (Why did you choose that running time?):
         public void PrintAllElements()
         {
-            for (int i = 0; i < rgNums.Length; i++)
+            for (int i = 0; i < arr.Length; i++)
             {
-                Console.WriteLine(rgNums[i]);
+                Console.WriteLine(arr[i]);
             }
         }
-
-
-        // Running time for this method:
-        // Explanation (Why did you choose that running time?):
         public bool Find(int val)
         {
             // search the entire length of the array for the value val
-            for (int i = 0; i < rgNums.Length; i++)
+            for (int i =0; i < arr.Length; i++)
             {
-                if (rgNums[i] == val)
+                if (arr[i] == val)
                 {
                     return true;
                 }
@@ -115,17 +59,14 @@ namespace SmartArray_Test
             return false;
         }
     }
-    }
 
     class Program
     {
-        // Tests for SmartArrayTests
         static void Main(string[] args)
         {
             SmartArray sa = new SmartArray();
             const int SMART_ARRAY_SIZE = 5;
             bool testPassed = false;
-            ErrorCode ec;
 
             Console.WriteLine("CHECK THIS: SmartArray starts with all zeros");
             sa.PrintAllElements();
@@ -134,8 +75,8 @@ namespace SmartArray_Test
 
             Console.WriteLine("================= SetAtIndex =================");
             Console.WriteLine("AutoChecked: Can add at slot 0?");
-            if ((ec = sa.SetAtIndex(0, 10)) != ErrorCode.NoError)
-                Console.WriteLine("TEST FAILED: UNABLE TO SET ELEMENT 0! (ErrorCode: {0})", ec);
+            if (!sa.SetAtIndex(0, 10))
+                Console.WriteLine("TEST FAILED: UNABLE TO SET ELEMENT 0!");
             else
                 Console.WriteLine("Test Passed: Able to set element 0!");
             Console.WriteLine("\n*******************\n");
@@ -144,9 +85,9 @@ namespace SmartArray_Test
             testPassed = true;
             for (int i = 0; i < SMART_ARRAY_SIZE; i++)
             {
-                if ((ec = sa.SetAtIndex(i, 10 * i)) != ErrorCode.NoError)
+                if (!sa.SetAtIndex(i, 10 * i))
                 {
-                    Console.WriteLine("TEST FAILED: UNABLE TO SET ELEMENT {0}! (ErrorCode: {1})", i, ec);
+                    Console.WriteLine("TEST FAILED: UNABLE TO SET ELEMENT {0}!", i);
                     testPassed = false;
                     break; // out of the loop
                 }
@@ -156,32 +97,31 @@ namespace SmartArray_Test
             Console.WriteLine("\n*******************\n");
 
             Console.WriteLine("AutoChecked: Should NOT be able to add at slot {0}?", SMART_ARRAY_SIZE);
-
-            if ((ec = sa.SetAtIndex(SMART_ARRAY_SIZE, 10)) != ErrorCode.Overflow)
-                Console.WriteLine("TEST FAILED: SET ELEMENT {0} DIDN'T OVERFLOW (ErrorCode: {1})", SMART_ARRAY_SIZE, ec);
+            if (sa.SetAtIndex(SMART_ARRAY_SIZE, 10))
+                Console.WriteLine("TEST FAILED: ABLE TO SET ELEMENT {0}?", SMART_ARRAY_SIZE);
             else
                 Console.WriteLine("Test Passed: Unable to set element {0}!", SMART_ARRAY_SIZE);
             Console.WriteLine("\n*******************\n");
 
             Console.WriteLine("AutoChecked: Should NOT be able to add at slot {0}?", SMART_ARRAY_SIZE + 10);
-            if ((ec = sa.SetAtIndex(SMART_ARRAY_SIZE + 10, 10)) != ErrorCode.Overflow)
-                Console.WriteLine("TEST FAILED: SET ELEMENT {0} DIDN'T OVERFLOW (ErrorCode: {1})", SMART_ARRAY_SIZE + 10, ec);
+            if (sa.SetAtIndex(SMART_ARRAY_SIZE + 10, 10))
+                Console.WriteLine("TEST FAILED: ABLE TO SET ELEMENT {0}?", SMART_ARRAY_SIZE + 10);
             else
                 Console.WriteLine("Test Passed: Unable to set element {0}!", SMART_ARRAY_SIZE + 10);
             Console.WriteLine("\n*******************\n");
 
             Console.WriteLine("AutoChecked: Should NOT be able to add at slot -1?");
-            if ((ec = sa.SetAtIndex(-1, 10)) != ErrorCode.Underflow)
-                Console.WriteLine("TEST FAILED: SET ELEMENT -1 DIDN'T UNDERFLOW! ErrorCode: {0})", ec);
+            if (sa.SetAtIndex(-1, 10))
+                Console.WriteLine("TEST FAILED: ABLE TO SET ELEMENT -1!");
             else
-                Console.WriteLine("Test Passed: Unable to set element -1!");
+                Console.WriteLine("Test Passed: UNable to set element -1!");
             Console.WriteLine("\n*******************\n");
 
             Console.WriteLine("AutoChecked: Should NOT be able to add at slot -10?");
-            if ((ec = sa.SetAtIndex(-10, 10)) != ErrorCode.Underflow)
-                Console.WriteLine("TEST FAILED: SET ELEMENT -10 DIDN'T UNDERFLOW! ErrorCode: {0})", ec);
+            if (sa.SetAtIndex(-10, 10))
+                Console.WriteLine("TEST FAILED: ABLE TO SET ELEMENT -10!");
             else
-                Console.WriteLine("Test Passed: Unable to set element -1!");
+                Console.WriteLine("Test Passed: UNable to set element -10!");
             Console.WriteLine("\n*******************\n");
 
             Console.WriteLine("CHECK THIS: Should see 0, 10, 20, 30, 40");
@@ -191,14 +131,11 @@ namespace SmartArray_Test
             Console.WriteLine("================= GetAtIndex =================");
             int valueGotten;
             Console.WriteLine("AutoChecked: Can get from slot 0?");
-            ec = sa.GetAtIndex(0, out valueGotten);
-            if (ec != ErrorCode.NoError)
+            valueGotten = sa.GetAtIndex(0);
+            if (valueGotten != 0)
             {
-                Console.WriteLine("TEST FAILED: UNABLE TO GET FROM SLOT 0 (ErrorCode: {0})", ec);
-            }
-            else if (valueGotten != 0)
-            {
-                Console.WriteLine("TEST FAILED: UNEXPECTED VALUE FROM SLOT 0: (EXPECTED 0, GOT {0})", valueGotten);
+                Console.WriteLine("TEST FAILED: UNABLE TO GET ELEMENT 0, OR UNEXPECTED VALUE!");
+                Console.WriteLine("             (EXPECTED 0, GOT {0})", valueGotten);
             }
             else
                 Console.WriteLine("Test Passed: Able to get expected value from slot 0!");
@@ -208,14 +145,11 @@ namespace SmartArray_Test
             testPassed = true;
             for (int i = 0; i < SMART_ARRAY_SIZE; i++)
             {
-                ec = sa.GetAtIndex(i, out valueGotten);
-                if (ec != ErrorCode.NoError)
+                valueGotten = sa.GetAtIndex(i);
+                if (valueGotten != 10 * i)
                 {
-                    Console.WriteLine("TEST FAILED: UNABLE TO GET FROM SLOT {0} (ErrorCode: {1})", i, ec);
-                }
-                else if (valueGotten != 10 * i)
-                {
-                    Console.WriteLine("TEST FAILED:  UNEXPECTED VALUE AT SLOT {0} (EXPECTED {1}, GOT {2})", i, i * 10, valueGotten);
+                    Console.WriteLine("TEST FAILED: UNABLE TO GET ELEMENT {0}, OR UNEXPECTED VALUE!", i);
+                    Console.WriteLine("             (EXPECTED {0}, GOT {1})", i * 10, valueGotten);
                     testPassed = false;
                     break; // out of the loop
                 }
@@ -226,40 +160,31 @@ namespace SmartArray_Test
 
 
             Console.WriteLine("AutoChecked: Should NOT be able to get from slot {0}?", SMART_ARRAY_SIZE);
-            if ((ec = sa.GetAtIndex(SMART_ARRAY_SIZE, out valueGotten)) != ErrorCode.Overflow)
-                Console.WriteLine("TEST FAILED: GET FROM ELEMENT {0} DIDN'T OVERFLOW (ErrorCode: {1})?", SMART_ARRAY_SIZE, ec);
-            else if (valueGotten != Int32.MinValue)
-                Console.WriteLine("TEST FAILED: GET FROM ELEMENT {0} DIDN'T PRODUCE Int32.MinValue", SMART_ARRAY_SIZE);
+            if (sa.GetAtIndex(SMART_ARRAY_SIZE) != Int32.MinValue)
+                Console.WriteLine("TEST FAILED: ABLE TO GET FROM ELEMENT {0}?", SMART_ARRAY_SIZE);
             else
                 Console.WriteLine("Test Passed: Unable to get from slot {0}!", SMART_ARRAY_SIZE);
             Console.WriteLine("\n*******************\n");
 
             Console.WriteLine("AutoChecked: Should NOT be able to get from slot {0}?", SMART_ARRAY_SIZE + 10);
-            if ((ec = sa.GetAtIndex(SMART_ARRAY_SIZE + 10, out valueGotten)) != ErrorCode.Overflow)
-                Console.WriteLine("TEST FAILED: GET FROM ELEMENT {0} DIDN'T OVERFLOW (ErrorCode: {1})?", SMART_ARRAY_SIZE + 10, ec);
-            else if (valueGotten != Int32.MinValue)
-                Console.WriteLine("TEST FAILED: GET FROM ELEMENT {0} DIDN'T PRODUCE Int32.MinValue", SMART_ARRAY_SIZE + 10);
+            if (sa.GetAtIndex(SMART_ARRAY_SIZE + 10) != Int32.MinValue)
+                Console.WriteLine("TEST FAILED: ABLE TO GET FROM ELEMENT {0}?", SMART_ARRAY_SIZE + 10);
             else
                 Console.WriteLine("Test Passed: Unable to get from slot {0}!", SMART_ARRAY_SIZE + 10);
             Console.WriteLine("\n*******************\n");
 
             Console.WriteLine("AutoChecked: Should NOT be able to get from slot -1?");
-            if ((ec = sa.GetAtIndex(-1, out valueGotten)) != ErrorCode.Underflow)
-                Console.WriteLine("TEST FAILED: GET FROM ELEMENT {0} DIDN'T UNDERFLOW(ErrorCode: {1})", -1, ec);
-            else if (valueGotten != Int32.MinValue)
-                Console.WriteLine("TEST FAILED: GET FROM ELEMENT {0} DIDN'T PRODUCE Int32.MinValue", -1);
+            if (sa.GetAtIndex(-1) != Int32.MinValue)
+                Console.WriteLine("TEST FAILED: ABLE TO GET FROM SLOT -1!");
             else
-                Console.WriteLine("Test Passed: Unable to get from slot {0}!", SMART_ARRAY_SIZE);
-
+                Console.WriteLine("Test Passed: Unable to get from slot -1!");
             Console.WriteLine("\n*******************\n");
 
             Console.WriteLine("AutoChecked: Should NOT be able to get from slot -10?");
-            if ((ec = sa.GetAtIndex(-10, out valueGotten)) != ErrorCode.Underflow)
-                Console.WriteLine("TEST FAILED: GET FROM ELEMENT {0} DIDN'T UNDERFLOW(ErrorCode:{1})", -10, ec);
-            else if (valueGotten != Int32.MinValue)
-                Console.WriteLine("TEST FAILED: GET FROM ELEMENT {0} DIDN'T PRODUCE Int32.MinValue", -10);
+            if (sa.GetAtIndex(-10) != Int32.MinValue)
+                Console.WriteLine("TEST FAILED: ABLE TO GET FROM SLOT -10!");
             else
-                Console.WriteLine("Test Passed: Unable to get from slot {0}!", SMART_ARRAY_SIZE);
+                Console.WriteLine("Test Passed: Unable to get from slot -10!");
             Console.WriteLine("\n*******************\n");
 
 
@@ -275,14 +200,8 @@ namespace SmartArray_Test
             testPassed = true;
             for (int i = 0; i < SMART_ARRAY_SIZE; i++)
             {
-                ec = sa.GetAtIndex(i, out valueGotten);
-                if (ec != ErrorCode.NoError)
-                {
-                    Console.WriteLine("TEST FAILED:UNABLE TO GET ELEMENT AT SLOT {0} (ErrorCode: {1})!", i, ec);
-                    testPassed = false;
-                    break;
-                }  // technically don't need the 'else'....
-                else if (!sa.Find(valueGotten)) // test by getting from array
+                valueGotten = sa.GetAtIndex(i);
+                if (!sa.Find(valueGotten)) // test by getting from array
                 {
                     Console.WriteLine("TEST FAILED: UNABLE TO FIND {0}!", valueGotten);
                     testPassed = false;
@@ -330,4 +249,4 @@ namespace SmartArray_Test
             Console.WriteLine("\n*******************\n");
         }
     }
-//}
+}

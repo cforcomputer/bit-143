@@ -14,8 +14,8 @@ namespace PCE_StarterProject
             //Reversing_User_Input rui = new Reversing_User_Input();
             //rui.RunExercise();
 
-            Basic_Generic_Test_Code bgtc = new Basic_Generic_Test_Code();
-            bgtc.RunExercise();
+            //Basic_Generic_Test_Code bgtc = new Basic_Generic_Test_Code();
+            //bgtc.RunExercise();
 
             //Basic_AbsValComparer_Test_Code bavctc = new Basic_AbsValComparer_Test_Code();
             //bavctc.RunExercise();
@@ -58,72 +58,72 @@ namespace PCE_StarterProject
 
     class Basic_Generic_Test_Code
     {
-        public void RunExercise()
-        {
-            //These lines of code have been commented out.
-            // They won't compile until you implement the generic
-            // BasicGeneric class.
+        //public void RunExercise()
+        //{
+        //    //These lines of code have been commented out.
+        //    // They won't compile until you implement the generic
+        //    // BasicGeneric class.
 
-            // Note that you should NOT modify this code at all:
+        //    // Note that you should NOT modify this code at all:
 
-            //////////////// ints /////////////////////////////////////////////
-            Console.WriteLine("=============================");
-            Console.WriteLine("Test for INT");
-            Console.WriteLine("=============================\n");
+        //    //////////////// ints /////////////////////////////////////////////
+        //    Console.WriteLine("=============================");
+        //    Console.WriteLine("Test for INT");
+        //    Console.WriteLine("=============================\n");
 
-            BasicGeneric<int> basic_int = new BasicGeneric<int>();
-            int intValueToStore = 100;
-            basic_int.SetItem(intValueToStore);
+        //    BasicGeneric<int> basic_int = new BasicGeneric<int>();
+        //    int intValueToStore = 100;
+        //    basic_int.SetItem(intValueToStore);
 
-            Console.WriteLine("Stored {0}, Print() tells us:", intValueToStore );
-            basic_int.Print();
+        //    Console.WriteLine("Stored {0}, Print() tells us:", intValueToStore );
+        //    basic_int.Print();
 
-            double intCheckVal = basic_int.GetItem();
-            Console.WriteLine("Using Get, got back: {0}", intCheckVal);
-            if (intCheckVal != intValueToStore )
-                Console.WriteLine("\tERROR: checkVal is not {0}", intValueToStore );
-            else
-                Console.WriteLine("\tGetItem appeared to work!");
+        //    double intCheckVal = basic_int.GetItem();
+        //    Console.WriteLine("Using Get, got back: {0}", intCheckVal);
+        //    if (intCheckVal != intValueToStore )
+        //        Console.WriteLine("\tERROR: checkVal is not {0}", intValueToStore );
+        //    else
+        //        Console.WriteLine("\tGetItem appeared to work!");
 
-            //////////////// doubles //////////////////////////////////////////
-            Console.WriteLine("\n=============================");
-            Console.WriteLine("Test for DOUBLE");
-            Console.WriteLine("=============================\n");
-            BasicGeneric<double> basic_double = new BasicGeneric<double>();
-            double doubleValueToStore = 3.14159;
-            basic_double.SetItem(doubleValueToStore);
+        //    //////////////// doubles //////////////////////////////////////////
+        //    Console.WriteLine("\n=============================");
+        //    Console.WriteLine("Test for DOUBLE");
+        //    Console.WriteLine("=============================\n");
+        //    BasicGeneric<double> basic_double = new BasicGeneric<double>();
+        //    double doubleValueToStore = 3.14159;
+        //    basic_double.SetItem(doubleValueToStore);
 
-            Console.WriteLine("Stored {0}, Print() tells us:", doubleValueToStore);
-            basic_double.Print();
+        //    Console.WriteLine("Stored {0}, Print() tells us:", doubleValueToStore);
+        //    basic_double.Print();
 
-            double doubleCheckVal = basic_double.GetItem();
-            Console.WriteLine("Using Get, got back: {0}", doubleCheckVal);
-            if (doubleCheckVal != doubleValueToStore)
-                Console.WriteLine("\tERROR: checkVal is not {0}", doubleValueToStore);
-            else
-                Console.WriteLine("\tGetItem appeared to work!");
+        //    double doubleCheckVal = basic_double.GetItem();
+        //    Console.WriteLine("Using Get, got back: {0}", doubleCheckVal);
+        //    if (doubleCheckVal != doubleValueToStore)
+        //        Console.WriteLine("\tERROR: checkVal is not {0}", doubleValueToStore);
+        //    else
+        //        Console.WriteLine("\tGetItem appeared to work!");
 
-            //////////////// strings //////////////////////////////////////////
-            Console.WriteLine("\n=============================");
-            Console.WriteLine("Test for STRING");
-            Console.WriteLine("=============================\n");
+        //    //////////////// strings //////////////////////////////////////////
+        //    Console.WriteLine("\n=============================");
+        //    Console.WriteLine("Test for STRING");
+        //    Console.WriteLine("=============================\n");
 
-            BasicGeneric<string> basic_string = new BasicGeneric<string>();
-            string stringValueToStore  = "fun  text here";
-            basic_string.SetItem(stringValueToStore );
+        //    BasicGeneric<string> basic_string = new BasicGeneric<string>();
+        //    string stringValueToStore  = "fun  text here";
+        //    basic_string.SetItem(stringValueToStore );
 
-            Console.WriteLine("Stored {0}, Print() tells us:", stringValueToStore );
-            basic_string.Print();
+        //    Console.WriteLine("Stored {0}, Print() tells us:", stringValueToStore );
+        //    basic_string.Print();
 
-            string stringCheckVal = basic_string.GetItem();
-            Console.WriteLine("Using Get, got back: {0}", stringCheckVal);
+        //    string stringCheckVal = basic_string.GetItem();
+        //    Console.WriteLine("Using Get, got back: {0}", stringCheckVal);
 
-            // != is ok for strings in C#, but not in Java
-            if (stringCheckVal != stringValueToStore ) 
-                Console.WriteLine("\tERROR: checkVal is not {0}", stringValueToStore );
-            else
-                Console.WriteLine("\tGetItem appeared to work!");
-        }
+        //    // != is ok for strings in C#, but not in Java
+        //    if (stringCheckVal != stringValueToStore ) 
+        //        Console.WriteLine("\tERROR: checkVal is not {0}", stringValueToStore );
+        //    else
+        //        Console.WriteLine("\tGetItem appeared to work!");
+        //}
     }
 
     // please put your 'BasicGeneric' class here
@@ -175,8 +175,14 @@ namespace PCE_StarterProject
     class What_Is_An_Enum
     {
         // What is an enum? Why would you want to use one?
-
+        /// An enum (short for enumeration) in C#, is a keyword that represents a value type for declaring a set of
+        /// named integer constants. It can be defined using the enum keywork directly inside a namespace, class, or structure
+        /// The enum is used to give a name to each constant so that the constant integer can be referred using its name.
+ 
+               
         // Why is an enum better than a public const int? (or a public static readonly int)?
+        /// Because, unlike the int, it makes code more readable by giving related constants meaningful names.
+        /// it also simultaneously improves maintainability by giving developers a simple reference for constants.
     }
 }
 
