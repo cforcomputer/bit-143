@@ -1,5 +1,7 @@
 ﻿using System;
 
+
+// 450 ADDING EXCEPTION HANDLING TO THE SMARTARRAY
 namespace SmartArray_Test
 {
     class UnderflowException : Exception
@@ -20,22 +22,69 @@ namespace SmartArray_Test
             rgNums = new int[5];
         }
 
+        public SmartArray(int howMany)
+        {
+            rgNums = new int[howMany];
+        }
+
         public void SetAtIndex(int idx, int val)
         {
+            // set the value at the index
+            if (idx < 0)
+            {
+                throw new UnderflowException("The index is less than zero!");
+            }
+
+            else if (idx > rgNums.Length || rgNums.Length == idx)
+            {
+                throw new OverflowException("The array is out of bounds!");
+            }
+            // check to make sure the index is set
+            // set rgNums[idx] out as val
+            rgNums[idx] = val;
+
+            //if (rgNums[idx] == val)
+            //{
+            //    // if it is, return no error
+            //    Console.WriteLine("The program is behaving as it should.");
+            //}
         }
 
         public int GetAtIndex(int idx)
         {
-            return 0;
+            // Checks to see if the slot can be accessed
+            if (idx < 0)
+            {
+                throw new UnderflowException("The index is less than zero!");
+            }
+            else if (idx > rgNums.Length || rgNums.Length == idx)
+            {
+                throw new OverflowException("The array is out of bounds!");
+            }
+            else
+            {
+                return rgNums[idx];
+            }
         }
 
         public void PrintAllElements()
         {
-
+            for (int i = 0; i < rgNums.Length; i++)
+            {
+                Console.WriteLine(rgNums[i]);
+            }
         }
 
         public bool Find(int val)
         {
+            // search the entire length of the array for the value val
+            for (int i = 0; i < rgNums.Length; i++)
+            {
+                if (rgNums[i] == val)
+                {
+                    return true;
+                }
+            }
             return false;
         }
     }
