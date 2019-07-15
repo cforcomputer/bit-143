@@ -14,11 +14,11 @@ namespace PCE_StarterProject
             //Reversing_User_Input rui = new Reversing_User_Input();
             //rui.RunExercise();
 
-            Basic_Generic_Test_Code bgtc = new Basic_Generic_Test_Code();
-            bgtc.RunExercise();
+            //Basic_Generic_Test_Code bgtc = new Basic_Generic_Test_Code();
+            //bgtc.RunExercise();
 
-            //Basic_AbsValComparer_Test_Code bavctc = new Basic_AbsValComparer_Test_Code();
-            //bavctc.RunExercise();
+            Basic_AbsValComparer_Test_Code bavctc = new Basic_AbsValComparer_Test_Code();
+            bavctc.RunExercise();
 
             // add more here, as you need
         }
@@ -224,45 +224,60 @@ namespace PCE_StarterProject
     {
         public void RunExercise()
         {
-            //AbsValComparer absolute_val_comp = new AbsValComparer();
+            AbsValComparer absolute_val_comp = new AbsValComparer();
 
-            //List<double> nums = new List<double>();
+            List<double> nums = new List<double>();
 
-            //nums.Add(20.4);
-            //nums.Add(-20.4);
-            //nums.Add(-10.3);
-            //nums.Add(3.1);
-            //nums.Add(-4.2);
+            nums.Add(20.4);
+            nums.Add(-20.4);
+            nums.Add(-10.3);
+            nums.Add(3.1);
+            nums.Add(-4.2);
 
-            //Console.WriteLine("Before sorting:\n");
-            //foreach( double num in nums)
-            //{
-            //    Console.WriteLine(num);
-            //}
+            Console.WriteLine("Before sorting:\n");
+            foreach (double num in nums)
+            {
+                Console.WriteLine(num);
+            }
 
-            //nums.Sort(absolute_val_comp);
+            nums.Sort(absolute_val_comp);
 
-            //Console.WriteLine("\nAfter sorting\n");
+            Console.WriteLine("\nAfter sorting\n");
 
-            //foreach (double num in nums)
-            //{
-            //    Console.WriteLine(num);
-            //}
+            foreach (double num in nums)
+            {
+                Console.WriteLine(num);
+            }
 
-            //double[] nums_to_find = { 3.1, -4.2, -20.4, 999 };
-            //foreach( double targetNum in nums_to_find)
-            //{
-            //    int loc = nums.BinarySearch(targetNum, absolute_val_comp);
-            //    if (loc >= 0)
-            //        Console.WriteLine("Found {0} at location {1}", targetNum, loc);
-            //    else
-            //        Console.WriteLine("Did not find {0}", targetNum);
-            //}
+            double[] nums_to_find = { 3.1, -4.2, -20.4, 999 };
+            foreach (double targetNum in nums_to_find)
+            {
+                int loc = nums.BinarySearch(targetNum, absolute_val_comp);
+                if (loc >= 0)
+                    Console.WriteLine("Found {0} at location {1}", targetNum, loc);
+                else
+                    Console.WriteLine("Did not find {0}", targetNum);
+            }
         }
     }
 
     // please put your 'AbsValComparer' class here
-
+    class AbsValComparer : IComparer<double>
+    {
+        public int Compare(double x, double y)
+        {
+            if (Math.Abs(x) < Math.Abs(y))
+                return -1;
+            else if (Math.Abs(y) < Math.Abs(x))
+                return 1;
+            else if (Math.Abs(x) == Math.Abs(y) && x < 0 && y > 0)
+                return -1;
+            else if (Math.Abs(x) == Math.Abs(y) && y < 0 && x > 0)
+                return 1;
+            else
+                return 0;
+        }
+    }
 
     class What_Is_An_Enum
     {
