@@ -19,27 +19,43 @@ namespace SmartArray_Test
     {
         int[] rgNums;
 
-        //// Running time for this method:
+        //// Running time for this method: 
+        /// O(1) - Constant time
         //// Explanation (Why did you choose that running time?):
+        /// I chose this running time because there is only one element that remains
+        /// the same, there will always be the single step of creating the array that is size 5. 
         public SmartArray()
         {
            rgNums = new int[5];
         }
 
         //// Running time for this method:
+        /// O(N) - Linear Time
         //// Explanation (Why did you choose that running time?):
+        /// Instead of an unchanging int like the default SmartArray constructor, the howMany parameter can be
+        /// any size. For this reason the time is linear instead of constant. 
+        /// Because memory allocation takes longer time for larger arrays.
+        /// ex:
+        /// around 10 ns for an array of size 1
+        /// around 400 ns for an array of size 10,000
+        /// around 300,000 ns for an array of size 1,000,000
         
-            // Second overloaded constructor
         public SmartArray(int howMany)
         {
+            // Second overloaded constructor
             // An integer that specifies what the size of the array should be
             // Allocates an array given by the param
 
             rgNums = new int[howMany];
         }
 
-        // Running time for this method:s
+        // Running time for this method:
+        /// O(1) - Constant time
         // Explanation (Why did you choose that running time?):
+        /// Given that each are conditional statements, where only one can be met, this method is constant time.
+        /// It can be an Underflow, but not an Overflow, and it can have no error, but then it would be neither
+        /// an Underflow or an Overflow.
+        
         public ErrorCode SetAtIndex(int idx, int val)
         {
             // set the value at the index
@@ -66,7 +82,16 @@ namespace SmartArray_Test
         }
 
         // Running time for this method:
+        ///  O(1) - Constant time
         // Explanation (Why did you choose that running time?):
+        /// There is always a single step to take, the number of steps for this method does not change when the 
+        /// size of the array changes. 
+        /// It will be one of the statements, not more than one. Either it will be:
+        /// (idx < 0) --> Underflow
+        /// or
+        /// (idx > rgNums.Length || rgNums.Length == idx)
+        /// or the val = rgNums[idx]
+
         public ErrorCode GetAtIndex(int idx, out int val)
         {
             // Checks to see if the slot can be accessed
@@ -89,8 +114,12 @@ namespace SmartArray_Test
              // return ErrorCode.Overflow;
         }
 
-        // Running time for this method:
+        // Running time for this method: 
+        /// O(N) Linear time
         // Explanation (Why did you choose that running time?):
+        /// We have access to every single element in the array, and we are printing them one at a time.
+        /// There is no special process, so the time is directly correlated to the overall size of the array
+        /// O * N
         public void PrintAllElements()
         {
             for (int i = 0; i < rgNums.Length; i++)
@@ -101,7 +130,14 @@ namespace SmartArray_Test
 
 
         // Running time for this method:
+        /// O(N^2) - BubbleSort
         // Explanation (Why did you choose that running time?):
+        /// This is BubbleSort, we previously discussed that BubbleSort is a linear search algorithm.
+        /// It's a linear search algorithm because we are taking an array, and then searching through it
+        /// one by one until we reach the correct integer. If you look at it on a graph, it appears as a
+        /// linear pattern.
+        /// We increment through the array by one each time, until rgNums[i] == val, and then we end it if 
+        /// it is true, otherwise we return false if the value is not present.
         public bool Find(int val)
         {
             // search the entire length of the array for the value val

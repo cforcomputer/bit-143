@@ -42,12 +42,6 @@ namespace SmartArray_Test
             // check to make sure the index is set
             // set rgNums[idx] out as val
             rgNums[idx] = val;
-
-            //if (rgNums[idx] == val)
-            //{
-            //    // if it is, return no error
-            //    Console.WriteLine("The program is behaving as it should.");
-            //}
         }
 
         public int GetAtIndex(int idx)
