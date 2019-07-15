@@ -8,11 +8,11 @@ namespace PCE_StarterProject
     {
         static void Main(string[] args)
         {
-            Using_DotNets_Stack uds = new Using_DotNets_Stack();
-            uds.RunExercise();
+            //Using_DotNets_Stack uds = new Using_DotNets_Stack();
+            //uds.RunExercise();
 
-            //Reversing_User_Input rui = new Reversing_User_Input();
-            //rui.RunExercise();
+            Reversing_User_Input rui = new Reversing_User_Input();
+            rui.RunExercise();
 
             //Basic_Generic_Test_Code bgtc = new Basic_Generic_Test_Code();
             //bgtc.RunExercise();
@@ -105,10 +105,29 @@ namespace PCE_StarterProject
     {
         public void RunExercise()
         {
-            // I'm leaving these here in case they're useful:
-            //Console.WriteLine("Please type a number");
-            //Console.WriteLine("Please type a negative number to stop");
-            //Console.WriteLine("Here's what you typed, backwards:");
+            // Create generic stack object
+            Stack<int> stack = new Stack<int>();
+            int readLine = 0;
+
+            while (readLine > -1)
+            {
+                Console.WriteLine("Please type a number");
+                Console.WriteLine("Please type a negative number to stop");
+                readLine = Convert.ToInt32(Console.ReadLine());
+                // Check to see if negative or not
+                if (readLine > -1)
+                {
+                    stack.Push(readLine);
+                }
+            }
+            Console.WriteLine("Here's what you typed, backwards:");
+
+            // Print contents of array backwards
+            for (int i = 0; i < stack.Count; i++)
+            {
+                Console.WriteLine(stack.Pop());
+            }
+            Console.WriteLine(stack.Peek());
         }
     }
 
