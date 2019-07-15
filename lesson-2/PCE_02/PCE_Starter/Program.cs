@@ -27,6 +27,37 @@ namespace PCE_StarterProject
     class What_Is_A_Stack 
     {
         // Put your answer here (in comments)
+        /// A stack is a container of objects that are inserted and removed according to the last-in first-out
+        /// LIFO principle. In the pushdown stacks, only two operations are allowed: push the item into the stack,
+        /// and pop the item out of the stack. 
+        /// A stack is a limited access data structure - elements can be removed and added only from the top. 
+        /// push = adds an item to the top of the stack
+        /// pop = removes an item from the top
+        /// A stack is a recursive data structure 
+        /// it is either empty, or consists of a top, and the rest is a stack.
+        /// 
+        /// Applications:
+        /// Reversing a word
+        /// The undo mechanism in text editors
+        /// Backtracking -- The process when you access the most recent element in a series of elements. 
+        /// Therefore at each point you on a stack all possible choice. Backtracking means popping a next 
+        /// choice from the stack.
+        /// Language processing -- space for parameters and local variables is created internally using a stack.
+        /// Compiler's syntax check for matching braces is implemented using a stack.
+        /// Support for recursion.
+        /// 
+        /// Implementations
+        /// Array based, Linked List
+        /// 
+        // Answer to 2. 
+        /// Push 1, 2, and 3 onto a stack.
+        /// 1-2-3
+        /// Pop the stack twice.
+        /// 1
+        /// Then push 4 and 5
+        /// 1-4-5
+        /// The top end is the 5, since it was the last number (presumptively) to be added to the stack.
+        /// Each new number placed on the stack ends up on top of the last number to be added.
     }
 
 
