@@ -8,8 +8,8 @@ namespace PCE_StarterProject
     {
         static void Main(string[] args)
         {
-            //Using_DotNets_Stack uds = new Using_DotNets_Stack();
-            //uds.RunExercise();
+            Using_DotNets_Stack uds = new Using_DotNets_Stack();
+            uds.RunExercise();
 
             //Reversing_User_Input rui = new Reversing_User_Input();
             //rui.RunExercise();
@@ -69,10 +69,35 @@ namespace PCE_StarterProject
     {
         // Your comment explaining the running time of
         // Push goes here
+        /// When talking about the O(1) operation and O(N) operations:
+        /// What does O(1) operation apply to in a stack?
+        /// A: Peek, push, and pop
+        /// There is not much processing involved in these cases, and they are merely returning a singular primitive.
+        /// What does N refer to in the context of Push?
+        /// A: N refers to the number of items in the stack. This would apply if we are using (ex: loop)
+        /// to pass through the stack to find a specific number.
 
 		// Make sure that "using System.Collections;" is at the top of this file
         public void RunExercise()
         {
+            // Create a stack
+            // Push numbers 1, 2 and 3
+            // Pop off the values and print them as you do so
+            // Make sure to use push, pop, and peek methods in code
+            // Less than 25 lines
+
+            Stack<int> stack = new Stack<int>();
+            stack.Push(1);
+            stack.Push(2);
+            stack.Push(3);
+            // 1, 2, 3
+            
+            for (int i = 0; i < stack.Count; i++)
+            {
+                // Print the stack and then pop that value in the stack.
+                Console.WriteLine("Pop\t\t{0}", stack.Pop());
+            }
+            Console.WriteLine("Peek\t\t{0}", stack.Peek());
         }
     }
 
