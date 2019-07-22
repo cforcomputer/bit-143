@@ -16,38 +16,81 @@ namespace PCE_StarterProject
         public static void Main(string[] args)
         {
             // Use this for any code that you want to
-            // put into main, and run as a stand-alone console applicatiion
+            // put into main, and run as a stand-alone console application
         }
     }
 
     public class StackOfInts : SmartArray // this must inherit from the SmartArray class
                                           // ORIG: public class StackOfInts // this must inherit from the SmartArray class
     {
-        /// <summary>
         /// topOfStack will be the index of the NEXT space that will be used
         /// So it therefore starts out at 0, meaning that 0 is UNoccupied.
-        /// </summary>
         protected int topOfStack = 0;
+
+        // Allocates the array that the StackOfInts will use to store the integers
         public StackOfInts()
         {
+            // note: not sure what size to allocate to the array, constructor starts at 0 - increases based on 
+            // value of topOfStack when new items added to the stack?
+            rgNums = new int[topOfStack];
         }
 
+        // TRUE if the stack currently contains NO elements.
+        // FALSE otherwise
         public bool isEmpty()
         {
-            throw new Exception("YOU NEED TO IMPLEMENT THIS!");
+            // testing
+            if (rgNums.Length == -1)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
+        // returns nothing
+        // throws an OverflowException if the stack runs out of space space in the underlying array
+        // Parameters: an integer that is the value to be added to the top of the stack
+        // This method will take the value given by the parameter, and add it to the top of the stack.
+
+        // HINT: In order for this to work, you must adjust topOfStack, an objective of this exercise 
+        // is to figure out how.
         public void Push(int item)
         {
-            throw new Exception("YOU NEED TO IMPLEMENT THIS!");
+            // if the array is full
+            if (topOfStack == rgNums.Length - 1)
+            {
+                throw new OverflowException("The stack is full!");
+            }
+            else
+            {
+                rgNums[topOfStack] = item;
+                Console.WriteLine("Added {0} to the top of the stack", item);
+            }
         }
         public int Peek()
         {
-            throw new Exception("YOU NEED TO IMPLEMENT THIS!");
+            // check to see if the stack is empty
+            if (isEmpty())
+            {
+                throw new UnderflowException("The stack is empty!");
+            }
+
+            return topOfStack;
         }
 
         public int Pop()
         {
-            throw new Exception("YOU NEED TO IMPLEMENT THIS!");
+            // check to see if the stack is empty or full
+            if (isEmpty())
+            {
+                throw new UnderflowException("The stack is empty!");
+            }
+            // if the array is not empty, return the top-most item on the stack AND remove it
+            int stackVal = rgNums[topOfStack - 1];
+            rgNums[topOfStack - 1] = 0;
+            return stackVal;
         }
     }
 
@@ -70,23 +113,63 @@ namespace PCE_StarterProject
 
         public void SetAtIndex(int idx, int val)
         {
-            throw new Exception("YOU NEED TO IMPLEMENT THIS!");
+            //////////////////REUSED CODE/////////////////
+            // set the value at the index
+            if (idx < 0)
+            {
+                throw new UnderflowException("The index is less than zero!");
+            }
+
+            else if (idx > rgNums.Length || rgNums.Length == idx)
+            {
+                throw new OverflowException("The array is out of bounds!");
+            }
+            // check to make sure the index is set
+            // set rgNums[idx] out as val
+            rgNums[idx] = val;
         }
         public int GetAtIndex(int idx)
         {
-            throw new OverflowException("Index out of bounds");
+            //////////////////REUSED CODE/////////////////
+            // Checks to see if the slot can be accessed
+            if (idx < 0)
+            {
+                throw new UnderflowException("The index is less than zero!");
+            }
+            else if (idx > rgNums.Length || rgNums.Length == idx)
+            {
+                throw new OverflowException("The array is out of bounds!");
+            }
+            else
+            {
+                return rgNums[idx];
+            }
         }
         public void PrintAllElements()
         {
-            throw new Exception("YOU NEED TO IMPLEMENT THIS!");
+            //////////////////REUSED CODE/////////////////
+            for (int i = 0; i < rgNums.Length; i++)
+            {
+                Console.WriteLine(rgNums[i]);
+            }
         }
         public bool Find(int val)
         {
-            throw new Exception("YOU NEED TO IMPLEMENT THIS!");
+            //////////////////REUSED CODE/////////////////
+            // search the entire length of the array for the value val
+            for (int i = 0; i < rgNums.Length; i++)
+            {
+                if (rgNums[i] == val)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
+        /// An integer – the size, in number of elements, that the SmartArray currently has the capacity to hold.
         public int getSize()
         {
-            throw new Exception("YOU NEED TO IMPLEMENT THIS!");
+            return rgNums.Length;
         }
     }
 
