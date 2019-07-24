@@ -25,14 +25,16 @@ namespace PCE_StarterProject
     {
         /// topOfStack will be the index of the NEXT space that will be used
         /// So it therefore starts out at 0, meaning that 0 is UNoccupied.
-        protected int topOfStack = 0;
+        /// 
+        // Question: Is 0 then the identifier for all unoccupied slots?
+        protected int topOfStack { get; set; }
 
         // Allocates the array that the StackOfInts will use to store the integers
         public StackOfInts()
         {
             // note: not sure what size to allocate to the array, constructor starts at 0 - increases based on 
             // value of topOfStack when new items added to the stack?
-            rgNums = new int[topOfStack];
+            this.rgNums = new int[5];
         }
 
         // TRUE if the stack currently contains NO elements.
@@ -104,11 +106,16 @@ namespace PCE_StarterProject
     // rest of the code to compile & run :)
     public class SmartArray
     {
+        private const int c = 10;
         protected int[] rgNums = new int[5];
 
         public SmartArray()
         {
-
+            SmartArray test1 = new SmartArray();
+            test1.SetAtIndex(5, 12);
+            test1.SetAtIndex(10, 11);
+            test1.GetAtIndex(5);
+            test1.PrintAllElements();
         }
 
         public void SetAtIndex(int idx, int val)
@@ -142,6 +149,8 @@ namespace PCE_StarterProject
             }
             else
             {
+            //    val = rgNums[idx];
+                Console.WriteLine(rgNums[idx]);
                 return rgNums[idx];
             }
         }
@@ -182,18 +191,33 @@ namespace PCE_StarterProject
         // So it therefore starts out at 0, meaning that 0 is UNoccupied.
         protected int backOfQueue = 0;
 
+        // default constructor
+        // allocates the array that the QueueOfInts will use to store the integers
         public QueueOfInts()
             : base()
         {
+            this.rgNums = new int[5];
         }
 
         public bool isEmpty()
         {
-            PrintQState("isEmpty()");
-            throw new Exception("YOU NEED TO IMPLEMENT THIS!");
+            // needs to inherit from StackOfInts isEmpty?
+            // testing
+            if (rgNums.Length == -1)
+            {
+                PrintQState("isEmpty()");
+                return true;                
+            }
+            else
+            {
+                return false;
+            }
         }
         public void Enqueue(int item)
         {
+            // needs to reuse code from SmartArray
+            // item = an integer that is the value to be added to the front of the queue
+            // required to implement a circular queue even though smart array already handles extra space.
             PrintQState("isEmpty()");
             throw new Exception("YOU NEED TO IMPLEMENT THIS!");
         }
@@ -213,19 +237,19 @@ namespace PCE_StarterProject
         // While not required, you may find this useful for your own debugging 
         public void PrintQState(string fnx)
         {
-            //Console.WriteLine(" QUEUE STATE: =======================");
-            //Console.WriteLine(" Calling {0}", fnx);
-            //Console.WriteLine("count:{0}", count);
-            //Console.WriteLine("this.getSize:{0}", this.getSize());
-            //Console.WriteLine("frontOfQueue:{0}", frontOfQueue);
-            //Console.WriteLine("backOfQueue:{0}", backOfQueue);
+            Console.WriteLine(" QUEUE STATE: =======================");
+            Console.WriteLine(" Calling {0}", fnx);
+            Console.WriteLine("count:{0}", count);
+            Console.WriteLine("this.getSize:{0}", this.getSize());
+            Console.WriteLine("frontOfQueue:{0}", frontOfQueue);
+            Console.WriteLine("backOfQueue:{0}", backOfQueue);
 
-            //int val;
-            //for (int i = 0; i < this.getSize(); i++)
-            //{
-            //    this.GetAtIndex(i, out val);
-            //    Console.WriteLine("\tIndex: {0}\tValue:{1}", i, val);
-            //}
+            int val;
+            for (int i = 0; i < this.getSize(); i++)
+            {
+                // this.GetAtIndex(i, out val);
+                // Console.WriteLine("\tIndex: {0}\tValue:{1}", i, val);
+            }
         }
 
     }
