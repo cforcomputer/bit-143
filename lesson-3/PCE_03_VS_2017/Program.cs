@@ -326,14 +326,38 @@ namespace PCE_StarterProject
 
     public class SmartArrayResizable : SmartArray
     {
+        // rnums = DECLARED IN THE SMARTARRAY
         public SmartArrayResizable()
         {
-
+            this.rgNums = new int[5];
         }
 
         public void Resize(int newSize)
         {
-            throw new Exception("YOU NEED TO IMPLEMENT THIS!");
+            if (newSize > this.rgNums.Length)
+            {
+                // allocate the new array with the extra size
+                int[] newArray = new int[this.rgNums.Length + 1];
+
+                for (int i = 0; i < newArray.Length; i++)
+                {
+                    // Copy all the old values into the new array
+                    newArray[i] = this.rgNums[i];
+                }
+                // set rgNums so that it refers to the new array
+                this.rgNums = newArray;
+            }
+
+            else if (newSize < this.rgNums.Length)
+            {
+                int[] newArrayS = new int[this.rgNums.Length - 1];
+
+                for (int i = 0; i < newArrayS.Length; i++)
+                {
+                    newArrayS[i] = this.rgNums[i];                                        
+                }
+                this.rgNums = newArrayS;
+            }
         }
     }
 
