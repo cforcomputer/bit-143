@@ -106,7 +106,6 @@ namespace PCE_StarterProject
     // rest of the code to compile & run :)
     public class SmartArray
     {
-        private const int c = 10;
         protected int[] rgNums = new int[5];
 
         public SmartArray()
@@ -186,6 +185,7 @@ namespace PCE_StarterProject
     {
         protected int count = 0;
         protected int frontOfQueue = 0;
+        protected int outVar;
 
         // backOfQueue will be the index of the NEXT space that will be used
         // So it therefore starts out at 0, meaning that 0 is UNoccupied.
@@ -218,20 +218,52 @@ namespace PCE_StarterProject
             // needs to reuse code from SmartArray
             // item = an integer that is the value to be added to the front of the queue
             // required to implement a circular queue even though smart array already handles extra space.
-            PrintQState("isEmpty()");
-            throw new Exception("YOU NEED TO IMPLEMENT THIS!");
+            // PrintQState("isEmpty()");
+
+            // if full, throw an overflow exception
+            // 11:00-Queue API Impl
+            if (count >= rgNums.Length)
+            {
+                throw new OverflowException("The queue is full!");
+            }
+            count++;
+            // If A is true, if not, then use C --> Adjusting backOfQueue
+            // Expression, not a statement
+            // the value of backOfQueue is 
+            backOfQueue = ((backOfQueue + 1) == rgNums.Length) ? 0 : (backOfQueue + 1);
+
+            // add the new item to the queue
+            rgNums[backOfQueue] = item;
         }
         public int Peek()
         {
-            PrintQState("isEmpty()");
-            throw new Exception("YOU NEED TO IMPLEMENT THIS!");
+            // check to see if the stack is empty
+            if (this.isEmpty())
+            {
+                throw new UnderflowException("The queue is empty!");
+            }
+
+            return frontOfQueue;
         }
 
+        // NO PARAMETERS
+        // Copies the front-most item into the out parameter (yo what?)
+        // Then removes the front-most item from the queue
         public int Dequeue()
         {
-            PrintQState("isEmpty()");
-            throw new Exception("YOU NEED TO IMPLEMENT THIS!");
+            if (rgNums == null)
+            {
+                throw new UnderflowException("The queue is empty!");
+            }
 
+            // If there is an item at the front of the queue, copy it and then remove that item.
+            if (frontOfQueue != -1)
+            {
+                outVar = rgNums[frontOfQueue];
+                rgNums[frontOfQueue] = 0;
+            }
+            
+            return rgNums[frontOfQueue];
         }
 
         // While not required, you may find this useful for your own debugging 
