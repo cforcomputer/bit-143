@@ -19,9 +19,18 @@ namespace PCE_StarterProject
             // put into main, and run as a stand-alone console application
         }
     }
+    //////////////////////////////////////////////////////////////////////////
+    ///////   _____ _           _ ____ __        _____       _          //////
+    /////// / ____| |           | |   / __ \ / _ |_ _|      | |         //////
+    /////// | (___ | |_ __ _ ___| | _| |  | | |_  | |  _ __ | |_ ___    //////
+    /////// \___ \| __/ _` |/ __| |/ / |  | |  _| | | | '_ \| __/ __|   //////
+    /////// ____) | || (_| | (__|   <| |__| | |  _| |_| | | | |_\__ \   //////
+    ///////|_____/ \__\__,_|\___|_|\_\\____/|_| |_____|_| |_|\__|___/   //////
+    //////////////////////////////////////////////////////////////////////////
 
     public class StackOfInts : SmartArray // this must inherit from the SmartArray class
-                                          // ORIG: public class StackOfInts // this must inherit from the SmartArray class
+                                          // ORIG: public class StackOfInts 
+                                          // this must inherit from the SmartArray class
     {
         /// topOfStack will be the index of the NEXT space that will be used
         /// So it therefore starts out at 0, meaning that 0 is UNoccupied.
@@ -37,6 +46,9 @@ namespace PCE_StarterProject
             this.rgNums = new int[5];
         }
 
+        // Running time: O(1)
+        // The running time is O(1) because there are never more than x steps with array.Length
+
         // TRUE if the stack currently contains NO elements.
         // FALSE otherwise
         public bool isEmpty()
@@ -51,6 +63,9 @@ namespace PCE_StarterProject
                 return false;
             }
         }
+        
+        // Running Time: O(1) There are no loops and everything doesn't take more than X steps.
+        
         // returns nothing
         // throws an OverflowException if the stack runs out of space space in the underlying array
         // Parameters: an integer that is the value to be added to the top of the stack
@@ -71,6 +86,9 @@ namespace PCE_StarterProject
                 Console.WriteLine("Added {0} to the top of the stack", item);
             }
         }
+
+        // Running Time: O(1) Constant time, not including the running time of isEmpty() and only taking into
+        // account the method call. There are x steps required to complete the operation so it remains constant.
         public int Peek()
         {
             // check to see if the stack is empty
@@ -82,6 +100,8 @@ namespace PCE_StarterProject
             return topOfStack;
         }
 
+        // Running Time: O(1) Constant time. Despite there being more operations than the other methods, Pop()
+        // only finds one spot in the array, and does no searching. Therefore it can be considered to be constant time.
         public int Pop()
         {
             // check to see if the stack is empty or full
@@ -96,6 +116,11 @@ namespace PCE_StarterProject
         }
     }
 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
     public class UnderflowException : Exception
     { public UnderflowException(string s) : base(s) { } }
     public class OverflowException : Exception
@@ -119,7 +144,6 @@ namespace PCE_StarterProject
 
         public void SetAtIndex(int idx, int val)
         {
-            //////////////////REUSED CODE/////////////////
             // set the value at the index
             if (idx < 0)
             {
@@ -136,7 +160,6 @@ namespace PCE_StarterProject
         }
         public int GetAtIndex(int idx)
         {
-            //////////////////REUSED CODE/////////////////
             // Checks to see if the slot can be accessed
             if (idx < 0)
             {
@@ -155,7 +178,6 @@ namespace PCE_StarterProject
         }
         public void PrintAllElements()
         {
-            //////////////////REUSED CODE/////////////////
             for (int i = 0; i < rgNums.Length; i++)
             {
                 Console.WriteLine(rgNums[i]);
@@ -163,7 +185,6 @@ namespace PCE_StarterProject
         }
         public bool Find(int val)
         {
-            //////////////////REUSED CODE/////////////////
             // search the entire length of the array for the value val
             for (int i = 0; i < rgNums.Length; i++)
             {
@@ -181,6 +202,13 @@ namespace PCE_StarterProject
         }
     }
 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
+
     public class QueueOfInts : SmartArray
     {
         protected int count = 0;
@@ -191,7 +219,7 @@ namespace PCE_StarterProject
         // So it therefore starts out at 0, meaning that 0 is UNoccupied.
         protected int backOfQueue = 0;
 
-        // default constructor
+        // 
         // allocates the array that the QueueOfInts will use to store the integers
         public QueueOfInts()
             : base()
@@ -199,15 +227,18 @@ namespace PCE_StarterProject
             this.rgNums = new int[5];
         }
 
+        // Running time: O(1)
+        // The running time is O(1) because there are never more than x steps with array.Length
         public bool isEmpty()
         {
             // needs to inherit from StackOfInts isEmpty?
-            // testing
-            if (rgNums.Length == -1)
+            // testing ---- Needs to recognize that any slot with 0 is empty?
+            if (rgNums.Length == 0)
             {
                 PrintQState("isEmpty()");
                 return true;                
             }
+            // else the slot has a number and isn't empty
             else
             {
                 return false;
@@ -215,6 +246,8 @@ namespace PCE_StarterProject
         }
         public void Enqueue(int item)
         {
+            // Running time: O(1) Constant time, there are no loops that would go from O to N. 
+
             // needs to reuse code from SmartArray
             // item = an integer that is the value to be added to the front of the queue
             // required to implement a circular queue even though smart array already handles extra space.
@@ -235,6 +268,8 @@ namespace PCE_StarterProject
             // add the new item to the queue
             rgNums[backOfQueue] = item;
         }
+
+        // Running time: 0(1) There are no loops that go from 0(1). There is x actions for the run time of the method.
         public int Peek()
         {
             // check to see if the stack is empty
@@ -245,6 +280,9 @@ namespace PCE_StarterProject
 
             return frontOfQueue;
         }
+
+        // Running time: O(1) -- Currently there are no loops from O to N, does not throw away half, technically
+        // does not access every element of the array.
 
         // NO PARAMETERS
         // Copies the front-most item into the out parameter (yo what?)
@@ -299,58 +337,58 @@ namespace PCE_StarterProject
         }
     }
 
-    class What_Is_A_Generic
-    {
-        // Put your comment here
-    }
+    //class What_Is_A_Generic
+    //{
+    //    // Put your comment here
+    //}
 
     // Your job is to finish this class, by implementing the three missing methods:
-    class BasicGeneric<T>
-    {
-        // T storedItem;
+    //class BasicGeneric<T>
+    //{
+    //    // T storedItem;
 
-        // You'll need to add a
-        // SetItem method
+    //    // You'll need to add a
+    //    // SetItem method
 
-        // You'll need to add a
-        // GetItem method
+    //    // You'll need to add a
+    //    // GetItem method
 
-        // You'll need to add a
-        // Print method
+    //    // You'll need to add a
+    //    // Print method
 
 
-        // And that's it!
-    }
+    //    // And that's it!
+    //}
 
-    class ProgramLogic
-    {
-        private int theData;
-        public ProgramLogic()
-        {
-            theData = 0;
-        }
+    //class ProgramLogic
+    //{
+    //    private int theData;
+    //    public ProgramLogic()
+    //    {
+    //        theData = 0;
+    //    }
 
-        public void PrintData()
-        {
-            Console.WriteLine(theData);
-        }
+    //    public void PrintData()
+    //    {
+    //        Console.WriteLine(theData);
+    //    }
 
-        // Method is defined to be virtual in the base class
-        public override string ToString()
-        {
-            return "ProgramLogic object containing: " + theData.ToString();
-        }
+    //    // Method is defined to be virtual in the base class
+    //    public override string ToString()
+    //    {
+    //        return "ProgramLogic object containing: " + theData.ToString();
+    //    }
 
-        public int Data
-        {
-            get
-            {
-                return theData;
-            }
-            set
-            {
-                theData = value;
-            }
-        }
-    }
+    //    public int Data
+    //    {
+    //        get
+    //        {
+    //            return theData;
+    //        }
+    //        set
+    //        {
+    //            theData = value;
+    //        }
+    //    }
+    //}
 }
