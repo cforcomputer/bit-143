@@ -175,30 +175,75 @@ namespace PCE_StarterProject
         {
             rgNums = new int[startingSize];
         }
-
+        // RUNNING TIME: O(1) Because the steps are constant time, we're performing a check 
+        // then we allocate an array, and assign a value.
         public void SetAtIndex(int idx, int val)
         {
-            throw new Exception("YOU NEED TO IMPLEMENT THIS!");
+            // Resizing the array to make room for idx if not
+            if (idx < rgNums.Length || idx > rgNums.Length || rgNums == null)
+            {
+                rgNums = new int[idx + 1];
+                rgNums[idx] = val;
+            }
+            rgNums[idx] = val;
         }
-
+        // RUNNING TIME: O(1) Because the x number of steps is constant, there are no loops or 
+        // complex operations.
         public int GetAtIndex(int idx)
         {
-            throw new Exception("YOU NEED TO IMPLEMENT THIS!");
+            if (idx < rgNums.Length)
+            {
+                throw new UnderflowException("The index is too low!");
+            }
+            else if (idx > rgNums.Length || rgNums == null)
+            {
+                throw new OverflowException("The index is too high or the array is not allocated!");
+            }
+            else
+            {
+                return rgNums[idx];
+            }
         }
 
         public void PrintAllElements()
         {
-            throw new Exception("YOU NEED TO IMPLEMENT THIS!");
+            if (rgNums == null)
+            {
+                Console.WriteLine("ARRAY NOT YET ALLOCATED");
+            }
+            for (int i = 0; i < rgNums.Length; i++)
+            {
+                Console.WriteLine("Element {0}: {1}", i, rgNums[i]);
+            }
         }
 
         public int getSize()
         {
-            throw new Exception("YOU NEED TO IMPLEMENT THIS!");
+            if (rgNums == null)
+            {
+                return 0;
+            }
+            return rgNums.Length;
         }
-
+        // RUNNING TIME: O(N) Because the array is a linear search, the duration of time it takes to run it 
+        // scales 1:1 with the size of the array.
         public bool Find(int val)
         {
-            throw new Exception("YOU NEED TO IMPLEMENT THIS!");
+            // Check to see if array is allocated
+            if (rgNums == null)
+            {
+                return false;
+            }
+            // Search for the value in the array (linear search)
+            for (int i = 0; i < rgNums.Length; i++)
+            {
+                if (rgNums[i] == val)
+                {
+                    return true;
+                }
+            }
+            // If the value not found, return false
+            return false;
         }
     }
 
