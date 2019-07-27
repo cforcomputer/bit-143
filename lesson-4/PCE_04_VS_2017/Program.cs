@@ -30,6 +30,20 @@ namespace PCE_StarterProject
         public static void Main(string[] args)
         {
             Console.WriteLine("Hello, world!");
+
+            // Test for adding to front of list //
+            MyIntList cc = new MyIntList();
+            cc.AddToFront(50);
+
+            for (int i = 0; i < 3; i++)
+            {
+                cc.AddToFront(3);
+            }
+
+            cc.PrintAll();
+            /////////////////////////////////////
+            
+
         }
     }
 
@@ -99,7 +113,16 @@ namespace PCE_StarterProject
 
         public void PrintAll()
         {
-            Console.WriteLine("You need to implement this!");
+            // cur assigned m_first item
+            IntListNode cur = m_first;
+            // while m_first/cur is not empty
+            while (cur != null)
+            {
+                // Print the object in the list
+                Console.WriteLine(cur.m_data);
+                // then move to the next object in the list
+                cur = cur.m_next;
+            }
         }
         public void RemoveFromFront()
         {
