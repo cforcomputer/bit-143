@@ -143,7 +143,22 @@ namespace PCE_StarterProject
         }
         public void PrintNode(uint i)
         {
-            Console.WriteLine("You need to implement this!");
+            int count = 0;
+            // Assign cur to the first node
+            IntListNode cur = m_first;
+
+            // If the first node is not empty AND count is less than the input total length
+            while (cur != null && count < i)
+            {
+                // Cur next node
+                cur = cur.m_next;
+                count++;
+            }
+            // Check to make sure we are still within bounds of the list
+            if (cur != null)
+            {
+                Console.WriteLine(cur.m_data);
+            }
         }
     }
 
