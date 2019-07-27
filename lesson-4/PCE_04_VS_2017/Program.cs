@@ -56,6 +56,7 @@ namespace PCE_StarterProject
             public int m_data;
             public IntListNode m_next;
 
+            // Add a constructor which takes as an argument an int that it will store
             public IntListNode(int data)
             {
                 m_data = data;
@@ -68,16 +69,32 @@ namespace PCE_StarterProject
                 m_next = next;
             }
         }
-        ///////////////////////////////////////////////////////////////////////////////////////////
-        
 
         // From this point down, it’s just normal MyIntList stuff
         private IntListNode m_first; // first item in the list
                                      // automtically given the value null 
 
+        ///////////////////////////////////////////////////////////////////////////////////////////
+
         // Implement this!
         public void AddToFront(int numToAdd)
         {
+            if (m_first == null) // list is empty
+            {
+                // create new node
+                IntListNode l = new IntListNode(numToAdd);
+                // Set front to new node
+                m_first = l;
+            }
+            else
+            {
+                // create new node
+                IntListNode nn = new IntListNode(numToAdd);
+                // new node.next = front
+                nn.m_next = m_first;
+                // front points to a new node
+                m_first = nn;
+            }
         }
 
         public void PrintAll()
