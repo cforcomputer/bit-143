@@ -124,8 +124,22 @@ namespace PCE_StarterProject
                 cur = cur.m_next;
             }
         }
-        public void RemoveFromFront()
+        public int RemoveFromFront() // changed to return int value
         {
+            // If the list is empty, return early
+            if (m_first == null)
+            {
+                return Int32.MinValue;
+            }
+            else
+            {
+                // Assign the first node's int value to x
+                int x = m_first.m_data;
+                // make m_first point towards the next node in the list
+                m_first = m_first.m_next;
+                // Return the integer value that was retrieved
+                return x;
+            }
         }
         public void PrintNode(uint i)
         {
