@@ -429,10 +429,28 @@ namespace PCE_StarterProject
         // Remove, BY INDEX
         public void RemoveAt(uint index)
         {
-            // // YOUR CODE GOES HERE!!!
+            if (m_first == null) return;
 
-            throw new Exception("YOU NEED TO IMPLEMENT THIS!");
+            if (index == 0)
+            {
+                m_first = m_first.m_next;
+                return;
+            }
 
+            LinkedListNode cur = m_first;
+
+            int counter = 0;
+            while (cur.m_next != null && counter < index - 1)
+            {
+                cur = cur.m_next;
+                counter++;
+            }
+
+            if (counter == index - 1 && cur.m_next != null)
+            {
+                cur.m_next = cur.m_next.m_next;
+            }
+            
         }
 
         // Add newData, so that it's in the proper sorted order (lowest to highest)
