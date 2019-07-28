@@ -416,6 +416,7 @@ namespace PCE_StarterProject
 
             LinkedListNode cur = m_first;
             int counter = 0;
+
             while (cur.m_next != null && counter < index - 1)
             {
                 cur = cur.m_next;
