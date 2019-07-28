@@ -465,7 +465,35 @@ namespace PCE_StarterProject
         // find the required value. Therefore the method big O can be considered completing in linear time.
         public void InsertInOrder(int newData)
         {
-            
+            LinkedListNode data = new LinkedListNode(newData);
+
+            if (m_first == null)
+            {
+                data.m_next = m_first;
+                m_first = data;
+                return;
+            }
+
+            LinkedListNode cur = m_first;
+            int counter = 0;
+
+            while (cur.m_next != null && data.m_next.m_data < newData)
+            {
+                cur = cur.m_next;
+                counter++;
+            }
+
+            if (cur.m_next == null)
+            {
+                data.m_next = null;
+                cur.m_next = data;
+            }
+            else
+            {
+                data.m_next = cur.m_next;
+                cur.m_next = data;
+            }
+            throw new OverflowException("Overflow, woopsy");
         }
 
         // RUN TIME: O(N) given that the while loop has to incrememnt through the entire linked list, assuming that it does not
