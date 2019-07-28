@@ -427,6 +427,9 @@ namespace PCE_StarterProject
         }
 
         // Remove, BY INDEX
+
+        // RUN TIME: O(N) given that the while loop has to incrememnt through the entire linked list, assuming that it does not
+        // find the required value. Therefore the method big O can be considered completing in linear time.
         public void RemoveAt(uint index)
         {
             if (m_first == null) return;
@@ -457,20 +460,46 @@ namespace PCE_StarterProject
         // Note that this method assumes that the list is already properly sorted
         // (i.e., you start from an empty list,and ONLY call this method to add things
         // to the list)
+
+        // RUN TIME: O(N) given that the while loop has to incrememnt through the entire linked list, assuming that it does not
+        // find the required value. Therefore the method big O can be considered completing in linear time.
         public void InsertInOrder(int newData)
         {
-            // YOUR CODE GOES HERE!!!
-
-            throw new Exception("YOU NEED TO IMPLEMENT THIS!");
-
+            
         }
 
+        // RUN TIME: O(N) given that the while loop has to incrememnt through the entire linked list, assuming that it does not
+        // find the required value. Therefore the method big O can be considered completing in linear time.
         public void RemoveByValue(int value)
         {
-            // YOUR CODE GOES HERE!!!
+            int counter = 0;
+            // Find the value in the array
+            LinkedListNode cur = m_first;
+            while (cur.m_next != null)
+            {
+                cur = cur.m_next;
+                counter++;
+                
+                // If the current value is the value to be removed
+                if (cur.m_data == value)
+                {
+                    cur = cur.m_next;
+                    return;
+                }
 
-            throw new Exception("YOU NEED TO IMPLEMENT THIS!");
+                // Find previous node of the node to be deleted
+                for (int i = 0; cur != null && i < counter -1; i++)
+                {
+                    cur = cur.m_next;
+                }
 
+                // Store the pointer to the next of the nodes to be deleted
+                LinkedListNode next = cur.m_next.m_next;
+                cur.m_next = next; // unlink the deleted node from the list
+                                    
+            }
+                throw new Exception("The value was not found.");
+            
         }
 
         public MyLinkedList Clone()
