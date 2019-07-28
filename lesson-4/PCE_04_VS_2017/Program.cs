@@ -41,9 +41,6 @@ namespace PCE_StarterProject
             }
 
             cc.PrintAll();
-            /////////////////////////////////////
-            
-
         }
     }
 
@@ -62,6 +59,7 @@ namespace PCE_StarterProject
 
 
         // constructor(s), if any
+
 
         ////////////////////////// Nested classes: basics assignment //////////////////////////////
         protected class IntListNode
@@ -162,6 +160,8 @@ namespace PCE_StarterProject
         }
     }
 
+    ///////////////////////////////////////////////////////////////////////////////////////////
+    
     public class SmartArrayAOD
     {
         int[] rgNums;
@@ -248,16 +248,39 @@ namespace PCE_StarterProject
     }
 
     ///////////////////////////////////////////////////////////////////////////////////
+    
     public class MyLinkedList
     {
+        // Added to the constructor so that methods would work inside MyLinkedList
         public class LinkedListNode
         {
             public int m_data;
             public LinkedListNode m_next;
+                       
+
+            // Add a constructor which takes as an argument an int that it will store
+            public LinkedListNode(int data)
+            {
+                m_data = data;
+                // m_next = null; // automatically done by CLR, so I don't have to
+            }
+
+            public LinkedListNode(int data, LinkedListNode next)
+                : this(data)
+            {
+                m_next = next;
+            }
+
         }
 
         // first item in the list, automtically given the value null
         protected LinkedListNode m_first;
+        private int value;
+
+        public MyLinkedList(int value)
+        {
+            this.value = value;
+        }
 
 
         // First, in your own words, summarize the important parts of the
@@ -353,7 +376,7 @@ namespace PCE_StarterProject
 
         }
         //////////////////////////////////////////////////////////////////////////////////////
-        
+
         // from previous ICEs:
         public void InsertAtFront(int value)
         {
@@ -364,17 +387,42 @@ namespace PCE_StarterProject
             // this up in ~5 minutes or so, including testing.  So re-typing
             // this is actually a good thing to do.
 
-            throw new Exception("YOU NEED TO IMPLEMENT THIS!");
+            if (m_first == null)
+            {
+                m_first = new LinkedListNode(value);
+            }
+            else
+            {
+                LinkedListNode n = new LinkedListNode(value);
+                n.m_next = m_first;
+                m_first = n;
+            }
 
         }
 
+        // RUN TIME: O(N) Linear search through a linked list results in a run time that is directly proportional to the 
+        // size of the linked list.
         // Add, BY INDEX
         public void InsertAt(int newData, uint index)
         {
-            // // YOUR CODE GOES HERE!!!
+            LinkedListNode ln = new LinkedListNode(newData);
 
-            throw new Exception("YOU NEED TO IMPLEMENT THIS!");
+            if (m_first == null || index == 0)
+            {
+                ln.m_next = m_first;
+                m_first = ln;
+                return;
+            }
 
+            LinkedListNode cur = m_first;
+            int counter = 0;
+            while (cur.m_next != null && counter < index - 1)
+            {
+                cur = cur.m_next;
+                counter++;
+            }
+            ln.m_next = cur.m_next;
+            cur.m_next = ln;
         }
 
         // Remove, BY INDEX
