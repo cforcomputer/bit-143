@@ -247,6 +247,7 @@ namespace PCE_StarterProject
         }
     }
 
+    ///////////////////////////////////////////////////////////////////////////////////
     public class MyLinkedList
     {
         public class LinkedListNode
@@ -264,7 +265,15 @@ namespace PCE_StarterProject
         // in class:
         //
         // YOUR ANSWER HERE
-        //
+        // --Setup-- means to implement the first steps of navigating a linked list. This typically means
+        // assigning a the first thing in the list to a new object that you have defined.
+        // --Iteration Logic-- is the logic involved with the important checks involved with navigating the 
+        // linked list. Any loops, anything being moved. Ex: while (cur != null) --> checking whether the 
+        // end of the linked list, or whether it is empty or not.
+        // --Work-- is everything that should be repeated for each node in the list. Also if you need to do something
+        // after you do the work for the node
+        // --Teardown-- anything that comes after you visit all the nodes. EX: Printing the node count after running through
+        // all the nodes.
 
 
         public void Print()
@@ -273,6 +282,11 @@ namespace PCE_StarterProject
             // the important steps of the 'list traversal' schema, 
             // in order to implement this method
 
+            /// Summary: The code first assigns the first value to the value of cur. Int the list transversal schema
+            /// this is the setup.
+            /// Then it checks if the list is empty or not with the while loop, this is the iteration logic.
+            /// Then it performs the work for each node, which is printing the contents and moving to the next node.
+            /// There isn't really a teardown in the case of this method.
             LinkedListNode cur = m_first;
             while (null != cur)
             {
@@ -289,11 +303,23 @@ namespace PCE_StarterProject
             // the important steps of the 'list traversal' schema, 
             // in order to implement this method
 
+            /// Summary: The code first assigns the first value to the value of cur. This is the setup.
+            /// Then, it checks to see if the list is empty in a while loop, running through the list during the 
+            /// iteration logic.
+            /// After that, it does the work for each node, moving to the next, checking to see if the data in the node
+            /// is equal to the target parameter. 
+            /// The teardown is returning false if the target value is not present after searching the list.
 
-            // YOUR CODE GOES HERE!!!
-
-            throw new Exception("YOU NEED TO IMPLEMENT THIS!");
-
+            LinkedListNode cur = m_first;
+            while (cur.m_next != null)
+            {
+                cur = cur.m_next;
+                if (cur.m_data == target)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
 
@@ -304,12 +330,30 @@ namespace PCE_StarterProject
             // the important steps of the 'list traversal' schema, 
             // in order to implement this method
 
+            /// Summary: The code first assigns the first value to the value of cur. This is the setup.
+            /// Then, it checks to see if the list is empty in a while loop, running through the list during the 
+            /// iteration logic.
+            /// After that, it does the work for each node, moving to the next, checking to see if the data in the node
+            /// is equal to the target parameter. If it is, it prints the value and returns true.
+            /// The teardown is returning false if the target value is not present after searching the list.
+
             // YOUR CODE GOES HERE!!!
 
-            throw new Exception("YOU NEED TO IMPLEMENT THIS!");
+            LinkedListNode cur = m_first;
+            while (cur.m_next != null)
+            {
+                cur = cur.m_next;
+                if (cur.m_data == target)
+                {
+                    Console.WriteLine(target);
+                    return true;
+                }
+            }
+            return false;
 
         }
-
+        //////////////////////////////////////////////////////////////////////////////////////
+        
         // from previous ICEs:
         public void InsertAtFront(int value)
         {
