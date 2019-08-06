@@ -9,7 +9,7 @@ using System;
 namespace Helpdesk
 {
     /// <summary>
-    /// 
+    /// Executes the program
     /// </summary>
     class Program
     {
