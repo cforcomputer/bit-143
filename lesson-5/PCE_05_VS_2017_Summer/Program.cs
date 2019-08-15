@@ -24,7 +24,9 @@ namespace PCE_StarterProject
         {
             Console.WriteLine("Hello, world!");
             RecursiveMethods recur = new RecursiveMethods();
-            recur.Print_Numbers_Recursively();
+            // recur.Print_Numbers_Recursively();
+             //recur.PrintEvenNumbers_Iteratively(16);
+             recur.PrintEvenNumbers_Recursively(16);
         }
     }
 
@@ -104,14 +106,29 @@ namespace PCE_StarterProject
             }
         }
 
+        // counts down from N to baseNum with a standard loop
         public void PrintEvenNumbers_Iteratively(int N)
         {
-            Console.WriteLine("YOU MUST IMPLEMENT THIS METHOD!!");
+            for (int baseNum2 = -1; N != baseNum2; N--)
+            {
+                if (N % 2 == 0) // if even
+                {
+                    Console.WriteLine("Argument: {0}", N);
+                }
+            }
         }
 
+        int baseNum3 = -1;
         virtual public void PrintEvenNumbers_Recursively(int N)
         {
-            Console.WriteLine("YOU MUST IMPLEMENT THIS METHOD!!");
+            if (N > baseNum3)
+            {
+                if (N % 2 == 0)
+                {
+                    Console.WriteLine(N);
+                }
+                PrintEvenNumbers_Recursively(N - 1);
+            }            
         }
 
         public int PowR(int b, int exp)
