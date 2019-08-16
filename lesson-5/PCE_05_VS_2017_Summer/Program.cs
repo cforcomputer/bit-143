@@ -187,7 +187,12 @@ namespace PCE_StarterProject
 
         public int Factorial(int n)
         {
-            return -1;
+            if (n < 0)
+            {
+                return 0;
+            }
+            else
+                return n * Factorial(n -1);
         }
 
         public void Fibonacci_Array(int[] array)
