@@ -25,8 +25,10 @@ namespace PCE_StarterProject
             Console.WriteLine("Hello, world!");
             RecursiveMethods recur = new RecursiveMethods();
             // recur.Print_Numbers_Recursively();
-             //recur.PrintEvenNumbers_Iteratively(16);
-             recur.PrintEvenNumbers_Recursively(16);
+            // recur.PrintEvenNumbers_Iteratively(16);
+            // recur.PrintEvenNumbers_Recursively(16);
+            // recur.PowR(2, 3);
+            recur.MultR(6, 2);
         }
     }
 
@@ -125,25 +127,62 @@ namespace PCE_StarterProject
             {
                 if (N % 2 == 0)
                 {
-                    Console.WriteLine(N);
+                    Console.WriteLine("Argument: {0}", N);
                 }
                 PrintEvenNumbers_Recursively(N - 1);
             }            
         }
 
+
+        // The method should take two integer parameters named B and E, and will return the value of B^E.  (for example, PowR(2,3) = 8, PowR(3,2) = 9, etc) 4
+        // You're not allowed to simply call the built-in Math.Pow method, and return the value, though – you need to find a way, by adjusting the values that
+        // you pass to the successive recursive calls, to get this to happen.  You only need to make this work for non-negative, whole numbers. 
+
+        // Make sure that your code does the right thing for positive numbers, zero, and negative numbers for both the base and the exponent.If a particular
+        // value(such as a negative exponent) doesn’t make sense(or is outside the scope of this exercise), your PowR method should catch that error, and then return 0. 
         public int PowR(int b, int exp)
         {
-            return -1;
+            // ex: b = 2 exp = 3
+            // 2 ^ 3 == 8
+            if (exp < 1)
+            {
+                return 1;
+            }
+            else
+            {
+                int tester = PowR(b, exp - 1); // 1 * 
+                Console.WriteLine(tester + " --> call PowR \n");
+                tester *=  b;
+                Console.WriteLine(tester + " --> multiply by base value  b \n");
+                return tester;
+            }
         }
 
-
+        // handles one-time initialization-type work
         public int MultR(int a, int b)
         {
-            return Int32.MinValue;
+            // int baseNum;
+            int val = __MultR(a, b);
+            Console.WriteLine("The value of {0} * {1} = {2}", a, b, val);
+            return val;
+           
         }
+        // private method handles the recursion
         private int __MultR(int a, int b)
         {
-            return Int32.MinValue;
+            // check to see if a is less than b, then if it is, swap them and check to make sure 
+            // b is not equal to 0.
+            if (a < b)
+            {
+                return __MultR(b, a);
+            }
+            else if (b != 0)
+            {
+                return (a + __MultR(a, b - 1));
+            }
+            else
+                return 0;
+
         }
 
         public int Factorial(int n)
