@@ -28,7 +28,18 @@ namespace PCE_StarterProject
             // recur.PrintEvenNumbers_Iteratively(16);
             // recur.PrintEvenNumbers_Recursively(16);
             // recur.PowR(2, 3);
-            recur.MultR(6, 2);
+            // (recur.MultR(6, 2));
+            // Console.WriteLine(recur.Factorial(6));
+            MyLinkedList list = new MyLinkedList();
+            list.InsertAtFront(5);
+            list.InsertAtFront(8);
+            list.InsertAtFront(10);
+            list.InsertAtFront(14);
+            Console.WriteLine("Recursively print forwards: ");
+            list.Print();
+
+            Console.WriteLine("Recursively print Backwards: ");
+            list.RecursivelyPrintBackward();
         }
     }
 
@@ -187,17 +198,36 @@ namespace PCE_StarterProject
 
         public int Factorial(int n)
         {
-            if (n < 0)
+            int baseNum;
+            if (n <= 0)
             {
                 return 0;
             }
             else
-                return n * Factorial(n -1);
+            {
+                baseNum = n + Factorial(n - 1);
+            }
+            return baseNum;
         }
 
+        // Fibonacci(0) = 0
+        // Fibonacci(1) = 1
+        // Fibonacci(N) = Fibonacci(N – 1) + Fibonacci(N – 2)
         public void Fibonacci_Array(int[] array)
         {
-            throw new Exception("YOU NEED TO REMOVE THIS LINE OF CODE, AND IMPLEMENT THIS METHOD");
+        //    int baseNum;
+
+        //    for (int i = 0; i < array.Length; i++)
+        //    {
+        //        if (array[i] <= 1)
+        //        {
+        //            return;
+        //        }
+        //        else
+        //        {
+        //            return Fibonacci_Array()
+        //        }
+        //    }
         }
     }
 
@@ -207,39 +237,71 @@ namespace PCE_StarterProject
         {
             public int m_data;
             public LinkedListNode m_next;
+
+            public LinkedListNode(int val)
+            {
+                m_data = val;
+                m_next = null;
+            }
         }
 
         // first item in the list, automtically given the value null
-        protected LinkedListNode m_first;
+        protected LinkedListNode m_first; //head
 
         // from previous ICEs:
         public void InsertAtFront(int value)
         {
-            // YOUR CODE GOES HERE!!
-            // You are allowed to copy-and-paste your prior work into here
-            // HOWEVER
-            // it's great practice to re-code this; you should be able to code
-            // this up in ~5 minutes or so, including testing.  So re-typing
-            // this is actually a good thing to do.
-            // return;
+            if (m_first == null)
+            {
+                m_first = new LinkedListNode(value);
+            }
+            else
+            {
+                LinkedListNode n = new LinkedListNode(value);
+                n.m_next = m_first;
+                m_first = n;
+            }
+
+            //    // Allocate the node and input data
+            //    LinkedListNode new_node = new LinkedListNode(value);
+            //    // make next of new node as head
+            //    new_node.m_next = m_first;
+            //    // move the head to point towards new node
+            //    m_first = new_node;            
         }
 
+        // already implemented after implementing RecursivelyPrintForward()
         public void Print()
         {
             RecursivelyPrintForward();
         }
 
+        // Print in order of input
         public void RecursivelyPrintForward()
         {
-            Console.WriteLine("YOU NEED TO IMPLEMENT THIS!");
-            return;
+            LinkedListNode currNode = m_first;
+            
+            while (currNode != null)
+            {
+                Console.WriteLine(currNode.m_data);
+                currNode = currNode.m_next;
+            }
         }
 
         public void RecursivelyPrintBackward()
         {
-            Console.WriteLine("YOU NEED TO IMPLEMENT THIS!");
-            return;
+            if (m_first == null)
+            {
+                return;
+            }
+            while (m_first != null)
+            {
+                Console.WriteLine(m_first.m_data); // print the data in the node
+                m_first = m_first.m_next;
+                RecursivelyPrintBackward();
+            }
         }
+
 
         public void RecursivelyPrint(bool fwd)
         {
