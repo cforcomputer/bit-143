@@ -208,22 +208,22 @@ namespace PCE_StarterProject
                 root = new BSTNode(key);
                 return;
             }
-            root.AddR(key);         
+          AddR(BSTNode, root);    // what to add for nodeToAdd     
            
         }
 
         private void AddR(BSTNode cur, BSTNode nodeToAdd)
         {
-            if (key < this.Data)
+            if (nodeToAdd.key < cur.Data)
             {
-                if (this.Left == null)
+                if (cur.Left == null)
                 {
-                    this.Left = new BSTNode(key);
+                    nodeToAdd.Left = new BSTNode(nodeToAdd.key);
                     return;
                 }
                 else
                 {
-                    this.Left.AddR(key);
+                    cur.Left.AddR(nodeToAdd.key);
                     return;
                 }
 
