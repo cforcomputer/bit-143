@@ -31,10 +31,10 @@ namespace PCE_StarterProject
             // (recur.MultR(6, 2));
             // Console.WriteLine(recur.Factorial(6));
             MyLinkedList list = new MyLinkedList();
-            list.InsertAtFront(5);
-            list.InsertAtFront(8);
-            list.InsertAtFront(10);
-            list.InsertAtFront(14);
+            list.InsertAtFront(1);
+            list.InsertAtFront(2);
+            list.InsertAtFront(3);
+            list.InsertAtFront(4);
             Console.WriteLine("Recursively print forwards: ");
             list.Print();
 
@@ -279,29 +279,30 @@ namespace PCE_StarterProject
         // Print in order of input
         public void RecursivelyPrintForward()
         {
-            LinkedListNode currNode = m_first;
-            
-            while (currNode != null)
+            if (m_first == null)
             {
-                Console.WriteLine(currNode.m_data);
-                currNode = currNode.m_next;
+                return;
+            }
+            else
+            {
+                Console.WriteLine(m_first.m_data);
+                m_first = m_first.m_next;
+                RecursivelyPrintForward(); // Run through method from top
             }
         }
-
+        // Print in the reverse order of input
         public void RecursivelyPrintBackward()
         {
             if (m_first == null)
             {
                 return;
             }
-            while (m_first != null)
+            else
             {
-                Console.WriteLine(m_first.m_data); // print the data in the node
-                m_first = m_first.m_next;
-                RecursivelyPrintBackward();
+                //iterate backwards through linked list
+
             }
         }
-
 
         public void RecursivelyPrint(bool fwd)
         {
