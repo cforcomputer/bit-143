@@ -19,6 +19,7 @@ namespace Helpdesk
     {
 
         private Node head;
+        private Node current;
 
         public class Node
         {
@@ -54,9 +55,30 @@ namespace Helpdesk
                 return;
             }
 
-            Console.WriteLine("\nHistory:\n{0}", head.data);
+            // printing the history
+            Console.WriteLine("\nHistory:");
             Console.WriteLine("Previously visited pages:\n");
-            Console.WriteLine("Pages in your 'future':\n");
+            Node node = head;
+            while (node != current)
+            {
+                Console.WriteLine(node.data);
+                node = node.Next;
+            }
+            // next pages
+            while (node != null)
+            {
+                Console.WriteLine(node.data);
+                node = node.Next;
+            }
+
+            ////////////////////////////////////////////
+
+            // future pages            
+            //Console.WriteLine("Pages in your 'future':");
+            //while (node != current)
+            //{
+            //    Console.WriteLine(node.data);
+            //}
         }
 
         // Move backwards in the linked list
@@ -85,14 +107,21 @@ namespace Helpdesk
 
             // MOVEFORWARDS/BACKWARDS: IF YOU'RE ALREADY AT THE END OF THE FUTURE/HISTORY LIST AND
             // YOU CALL THESE, THEN YOU'LL ADD A "NULL" STRING TO THE OTHER LIST.
-            if (head == null)
+            if (current == head)
             {
                 return;
             }
-            else
-            {
 
+            Node previous = head;
+
+            // find the node behind that's pointing to the current node
+            while(previous.Next != current)
+            {
+                previous = previous.Next;
             }
+
+            // make node new current
+            current = previous;
         }
 
 
@@ -114,13 +143,9 @@ namespace Helpdesk
 
             // DOES NOT WORK - IT CURRENTLY ALWAYS RESETS THE HISTORY TO BEING THE SECOND ITEM ON THE LIST
 
-            if (head == null)
+            if (current.Next != null)
             {
-                return;
-            }
-            else
-            {
-                head = head.Next;
+                current = current.Next;
             }
         }
 
@@ -147,18 +172,19 @@ namespace Helpdesk
             //    empty.Next = head;
             //    head = empty;
             //}
-            
+
+
+            Node node = new Node(pageName);
 
             if (head == null)
             {
-                head = new Node(pageName);
+                head = node;
             }
-            else
-            {                
-                Node empty = new Node(pageName);
-                empty.Next = head;
-                head = empty;
+            else if (current != null)
+            {
+                current.Next = node;
             }
+            current = node;
         }
     }
 }
