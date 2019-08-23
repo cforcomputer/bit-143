@@ -74,11 +74,19 @@ namespace Helpdesk
             ////////////////////////////////////////////
 
             // future pages            
-            //Console.WriteLine("Pages in your 'future':");
-            //while (node != current)
-            //{
-            //    Console.WriteLine(node.data);
-            //}
+            Console.WriteLine("Pages in your 'future':");
+            
+            if (current.Next != null)
+            {
+                Console.WriteLine(current.data);
+                
+                if (node != current)
+                {
+                    Console.WriteLine(current.Next.data);
+                }
+            }
+            
+            
         }
 
         // Move backwards in the linked list
@@ -107,6 +115,10 @@ namespace Helpdesk
 
             // MOVEFORWARDS/BACKWARDS: IF YOU'RE ALREADY AT THE END OF THE FUTURE/HISTORY LIST AND
             // YOU CALL THESE, THEN YOU'LL ADD A "NULL" STRING TO THE OTHER LIST.
+            if (head == null) // check to see if the list is empty
+            {
+                return;
+            }
             if (current == head)
             {
                 return;

@@ -139,30 +139,32 @@ namespace PCE_StarterProject
 
         public bool FindR(int target)
         {
+            BSTNode nn = new BSTNode(target);
             // non-working:
+            // replaced this. reference with nn (not correct?) removes error for now.
             if (root == null)
                 return false;
 
-            if (target < this.key)
+            if (target < nn.key)
             {
-                if (this.Left == null)
+                if (nn.Left == null)
                 {
                     return false;
                 }
                 else
                 {
-                    return FindR(target, this.Left);
+                    return FindR(target, nn.Left);
                 }
             }
-            else if (target > this.key)
+            else if (target > nn.key)
             {
-                if (this.Right == null)
+                if (nn.Right == null)
                 {
                     return false;
                 }
                 else
                 {
-                    return FindR(target, this.Right);
+                    return FindR(target, nn.Right);
                 }
             }
             else
@@ -208,7 +210,7 @@ namespace PCE_StarterProject
                 root = new BSTNode(key);
                 return;
             }
-          AddR(BSTNode, root);    // what to add for nodeToAdd     
+          // AddR(root, );    // what to add for nodeToAdd     
            
         }
 
@@ -223,7 +225,7 @@ namespace PCE_StarterProject
                 }
                 else
                 {
-                    cur.Left.AddR(nodeToAdd.key);
+                    // cur.Left.AddR(nodeToAdd.key);
                     return;
                 }
 
@@ -235,7 +237,6 @@ namespace PCE_StarterProject
         {
             Console.WriteLine("NOT YET IMPLEMENTED");
             return;
-
         }
     }
 }

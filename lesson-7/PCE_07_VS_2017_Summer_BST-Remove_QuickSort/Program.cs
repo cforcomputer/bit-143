@@ -164,9 +164,22 @@ namespace PCE_StarterProject
             //First, find the target node that we need to remove
             // we'll have the 'parent' reference trail the cur pointer down the tree
             // so when we stop, cur is the node to remove, and parent is one above it.
-            while (false)
+            while (true)
             {
-
+                if (cur.Data == target)
+                {
+                    break;
+                }
+                else if (cur.Data > target)
+                {
+                    parent = cur;
+                    cur = cur.Left;
+                }
+                else
+                {
+                    parent = cur;
+                    cur = cur.Right;
+                }
             }
 
             // Next, we figure out which of the cases we're in
@@ -174,20 +187,29 @@ namespace PCE_StarterProject
             // Case 1: The target node has no children
             if (cur.Left == null && cur.Right == null)
             {
-
+                cur = parent;
+                cur.Left = null;
+                cur.Right = null;
 
                 return;
             }
             // Case 2: The target node has 1 child
             // (You may want to split out the left vs. right child thing)
-
+            else if (cur.Left == null || cur.Right == null)
+            {
+                BSTNode temp = (cur.Left == null) ? cur.Right : cur.Left;
+                if (parent.Left == cur)
+                    parent.Left = temp;
+                else
+                    parent.Right = temp;
+            }
 
             // Case 3: The target node has 1 child
-
-
-
-
-
+            else
+            {
+                int temp = TestFindAndRemoveNextSmallest(cur.Data);
+                parent.Data = temp;
+            }
         }
 
         private void RemoveRootNode(int target)
@@ -258,14 +280,74 @@ namespace PCE_StarterProject
 
     public class SearchingAndSorting
     {
-        public int Partition(int[] nums, int left, int right)
+        // Answer O(nlogn)
+        // Answer O(1) space
+        public int Partition(int[] arr, int low, int high)
         {
-            return -1;
+            int pivot = arr[low];
+
+            // index of the smaller element
+            int i = (low - 1);
+            for (int j = low; j < high; j++)
+            {
+                if (arr[j] <= pivot)
+                {
+                    i++;
+                    int temp = arr[i];
+                    arr[i] = arr[j];
+                    arr[j] = temp;
+                }
+            }
+
+            int temp1 = arr[i + 1];
+
+            arr[i + 1] = arr[low];
+
+            arr[low] = temp1;
+
+            return i + 1;
         }
-        public void QuickSort(int[] A)
+
+
+        public void QuickSort(int[] nums)
         {
-            for (int i = 0; i < A.Length; i++)
-                A[i] = Int32.MinValue;
+            QuickSort(nums, 0, nums.Length - 1);          
+
+        }
+
+        private void QuickSort(int[] nums, int iStart, int iEnd)
+        {
+            if (iStart < iEnd)
+            {
+                int pi = partition(nums, iStart, iEnd);
+                QuickSort(nums, iStart, pi - 1);
+                QuickSort(nums, pi - 1, iEnd);
+            }
+        }
+
+            //finding the parttion index
+        private void swap(int a, int b)
+        {
+            int temp = a;
+            a = b;
+            b = temp;
+        }
+        private int partition(int[] arr, int low, int high)
+        {
+            int pivot = arr[high]; // pivot
+            int i = (low - 1); // Index of smaller element
+
+        for (int j = low; j <= high - 1; j++)
+        {
+            // If current element is smaller than the pivot
+            if (arr[j] < pivot)
+            {
+                i++; // increment index of smaller element
+                swap(arr[i], arr[j]);
+            }
+        }
+        swap(arr[i + 1], arr[high]);
+        return (i + 1);
         }
     }
 }
