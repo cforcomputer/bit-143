@@ -69,9 +69,6 @@ namespace MulitList_Starter
     // Bit of a hack, but still an interesting idea....
     enum MenuOptions
     {
-        // DO NOT USE ZERO!
-        // (TryParse will set choice to zero if a non-number string is typed,
-        // and we don't want to accidentally set nChoice to be a member of this enum!)
         QUIT = 1,
         ADD_BOOK,
         PRINT,
@@ -95,8 +92,8 @@ namespace MulitList_Starter
                 Console.WriteLine("Your options:");
                 Console.WriteLine("1 : End the program");
                 Console.WriteLine("2 : Add a book");
-                Console.WriteLine("3 : Print all books");
-                Console.WriteLine("4 : Remove a Book");
+                Console.WriteLine("3 : Remove a book");
+                Console.WriteLine("4 : Print all books");
                 Console.WriteLine("5 : RUN TESTS");
 
                 if (!Int32.TryParse(Console.ReadLine(), out nChoice))
@@ -119,10 +116,6 @@ namespace MulitList_Starter
                     case 4: // Print all books                  
                         Console.WriteLine("Print books: \n");
                         break;
-                    //case MenuOptions.RUN_TESTS:
-                    //    AllTests tester = new AllTests();
-                    //    tester.RunTests();
-                    //    break;
                     default:
                         Console.WriteLine("I'm sorry, but that wasn't a valid menu option");
                         break;
@@ -171,6 +164,7 @@ namespace MulitList_Starter
 
         public void RemoveBook()
         {
+            
             Console.WriteLine("REMOVE A BOOK!");
 
             Console.WriteLine("Author name?");
@@ -184,8 +178,11 @@ namespace MulitList_Starter
             // STUDENTS: YOUR ERROR-CHECKING CODE SHOULD GO HERE!
             if (author != null && title != null)
             {
+                theList.Remove(author, title);
                 Console.WriteLine(ErrorCode.OK);
+                return;
             }
+            Console.WriteLine(ErrorCode.BookNotFound);
         }        
     }
 
@@ -196,8 +193,7 @@ namespace MulitList_Starter
         BookNotFound
     }
 
-  
-    // start my code
+
 
     // perform all operations related to book
     class MultiLinkedListOfBooks
@@ -213,9 +209,6 @@ namespace MulitList_Starter
         {
             this.head = new_node;
         }
-        //private class Author
-        //{
-        //}
 
         // method to add a new book node
         public Node InsertNode(Node new_book)
@@ -287,6 +280,7 @@ namespace MulitList_Starter
         public void Print()
         {
             // if there are no books, then print out a message saying that the list is empty
+            Node temp = head;
             
             if (head == null)
             {
@@ -297,6 +291,16 @@ namespace MulitList_Starter
             Node node = head;
             while (node != node.previous)
             {
+                
+                    Console.WriteLine(temp.data.author);
+                    Console.WriteLine(temp.data.book_title);
+                    Console.WriteLine(temp.data.price);
+                    head = temp.next;
+                
+                node = node.next;
+            }
+            while (node != null)
+            {
                 Console.WriteLine(node.data);
                 node = node.next;
             }
@@ -304,17 +308,22 @@ namespace MulitList_Starter
 
         public ErrorCode Remove(string author, string title)
         {
-            if (head != null)
+            Node temp = head;
+            if (head == null)
             {
-                if (head.data.author == author)
-                {
-
-                }
+                return ErrorCode.BookNotFound;
             }
-            // if there isn't an exact match, then do the following:
-            return ErrorCode.BookNotFound;
-            // (this includes finding a book by the given author, but with a different title,
-            // or a book with the given title, but a different author)
+            
+            if (head.data.author == author && head.data.book_title == title)
+            {
+                head = temp.next;                
+            }
+            if (temp == null || temp.next == null)
+                return ErrorCode.BookNotFound;
+            Node next = temp.next.next;
+            temp.next = next;
+
+            return ErrorCode.OK;
         }
     }
 }
