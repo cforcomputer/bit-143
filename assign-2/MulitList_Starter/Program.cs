@@ -60,11 +60,9 @@ namespace MulitList_Starter
     {
         static void Main(string[] args)
         {
-            (new UserInterface()).RunProgram();
-
             // Or, you could go with the more traditional:
-            // UserInterface ui = new UserInterface();
-            // ui.RunProgram();
+            UserInterface ui = new UserInterface();
+            ui.RunProgram();
         }
     }
 
@@ -100,6 +98,7 @@ namespace MulitList_Starter
                 Console.WriteLine("3 : Print all books");
                 Console.WriteLine("4 : Remove a Book");
                 Console.WriteLine("5 : RUN TESTS");
+
                 if (!Int32.TryParse(Console.ReadLine(), out nChoice))
                 {
                     Console.WriteLine("You need to type in a valid, whole number!");
@@ -113,10 +112,11 @@ namespace MulitList_Starter
                     case 2: // add a book
                         AddBook();
                         break;
-                    case 3: // print all books
+                    case 3: // Remove a book
                         Console.WriteLine("Remove a book: \n");
+                        RemoveBook();
                         break;
-                    case 4: // Remove a book                   
+                    case 4: // Print all books                  
                         Console.WriteLine("Print books: \n");
                         break;
                     //case MenuOptions.RUN_TESTS:
@@ -131,15 +131,20 @@ namespace MulitList_Starter
         }
 
         public void AddBook()
-        {           
+        {
+            // Node node = new Node();
+            book nn = new book();
+            MultiLinkedListOfBooks ll = new MultiLinkedListOfBooks();
 
             Console.WriteLine("ADD A BOOK!");
 
             Console.WriteLine("Author name?");
             string book_author = Console.ReadLine();
+            nn.author = book_author;
 
             Console.WriteLine("Title?");
             string book_name = Console.ReadLine();
+            nn.book_title = book_name;
 
             double price = -1;
             while (price < 0)
@@ -155,14 +160,13 @@ namespace MulitList_Starter
                     Console.WriteLine("I'm sorry, but the number must be zero, or greater!!");
                 }
             }
-
-            book new_book = new book(book_name, book_author, price);
-            Node new_node = new Node(new_book, null, null);
-           //  LinkedList ll = LinkedList();
-            
-            
+            nn.price = price;
 
             // STUDENTS: YOUR ERROR-CHECKING CODE SHOULD GO HERE!
+            if (book_author != null && book_name != null)
+            {
+                Console.WriteLine(ErrorCode.OK);
+            }            
         } // end AddBook
 
         public void RemoveBook()
@@ -175,9 +179,13 @@ namespace MulitList_Starter
             Console.WriteLine("Title?");
             string title = Console.ReadLine();
 
-            // ErrorCode ec = theList.Remove(author, title);
+            ErrorCode ec = theList.Remove(author, title);
 
             // STUDENTS: YOUR ERROR-CHECKING CODE SHOULD GO HERE!
+            if (author != null && title != null)
+            {
+                Console.WriteLine(ErrorCode.OK);
+            }
         }        
     }
 
@@ -205,35 +213,41 @@ namespace MulitList_Starter
         {
             this.head = new_node;
         }
-        private class Author
-        {
-        }
+        //private class Author
+        //{
+        //}
 
         // method to add a new book node
         public Node InsertNode(Node new_book)
         {
+            Console.WriteLine("Running insert...");
             if (this.head == null)
             {
+                Console.Write("*");
                 this.head = new_book;
             }
 
             Node temp = this.head;
             while (temp != null)
             {
+                Console.Write("*");
                 new_book.previous = temp;
                 temp = temp.next;
             }
             temp = new_book;
+
+            SortingLinkedList();
             return this.head;
         }
 
         // sorting the linked list by title - alphabetical order
-        public Node SortingLinkedList()
+        public Node SortingLinkedList() // returns head
         {
             Node temp1 = this.head, temp2 = this.head;
 
             while (temp1 != null)
             {
+                Console.WriteLine("Running sort");
                 temp2 = head;
                 
                 while (temp2 != null)
@@ -242,6 +256,7 @@ namespace MulitList_Starter
 
                     if (temp2.next != null && temp2.data.author.CompareTo(temp2.next.data.author) > 0 )
                     {
+                        Console.Write("*");
                         Node tmp1 = temp2.next;
                         temp2.next = temp2.next.next;
                         tmp1.previous = temp2.previous;
@@ -250,8 +265,10 @@ namespace MulitList_Starter
                     }
                     else if (temp2.next != null && temp2.data.author.CompareTo(temp2.next.data.book_title) == 0)
                     {
+                        Console.Write("*");
                         if (temp2.data.book_title.CompareTo(temp2.next.data.book_title) > 0)
                         {
+                            Console.Write("*");
                             Node tmp1 = temp2.next;
                             temp2.next = temp2.next.next;
                             tmp1.previous = temp2.previous;
@@ -265,25 +282,39 @@ namespace MulitList_Starter
             }
             return this.head;
         }
-        
 
-        //public void Print()
-        //{
-        //    // if there are no books, then print out a message saying that the list is empty
-        //    int n = 0;
-        //    while (n != 4)
-        //    {
-        //        Console.WriteLine("Enter the information below");
-        //        Console.WriteLine
-        //    }
-        //}
 
-        //public ErrorCode Remove(string author, string title)
-        //{
-        //    // if there isn't an exact match, then do the following:
-        //    return ErrorCode.BookNotFound;
-        //    // (this includes finding a book by the given author, but with a different title,
-        //    // or a book with the given title, but a different author)
-        //}
+        public void Print()
+        {
+            // if there are no books, then print out a message saying that the list is empty
+            
+            if (head == null)
+            {
+                Console.WriteLine(ErrorCode.BookNotFound);
+                return;
+            }
+
+            Node node = head;
+            while (node != node.previous)
+            {
+                Console.WriteLine(node.data);
+                node = node.next;
+            }
+        }
+
+        public ErrorCode Remove(string author, string title)
+        {
+            if (head != null)
+            {
+                if (head.data.author == author)
+                {
+
+                }
+            }
+            // if there isn't an exact match, then do the following:
+            return ErrorCode.BookNotFound;
+            // (this includes finding a book by the given author, but with a different title,
+            // or a book with the given title, but a different author)
+        }
     }
 }
